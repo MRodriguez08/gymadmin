@@ -1,0 +1,29 @@
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+     
+     <ui:define name="content">
+	
+		<p:outputLabel value="JournalDev - JSF2/Primefaces Tutorial"></p:outputLabel>
+		
+		<p:dataTable value="#{planBean.plans}"
+			var="plan">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Id"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{plan.id}"></h:outputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Name"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{plan.name}"></h:outputText>
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+	
+</ui:composition>
