@@ -14,8 +14,8 @@ import com.gymadmin.persistence.dao.PaymentStateDao;
 import com.gymadmin.persistence.entities.CustomerEntity;
 import com.gymadmin.persistence.entities.PaymentEntity;
 import com.gymadmin.persistence.entities.PaymentStateEntity;
-import com.mrodriguez.commons.exceptions.BusinessException;
-import com.mrodriguez.commons.persistence.HibernateUtil;
+import com.gymadmin.repository.BusinessException;
+import com.gymadmin.repository.HibernateUtil;
 
 
 /**

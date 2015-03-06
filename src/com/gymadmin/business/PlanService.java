@@ -9,7 +9,7 @@ import com.gymadmin.persistence.entities.PlanEntity;
  *
  * @author mrodriguez
  */
-public interface PlanBusiness {
+public interface PlanService {
     
     public List<PlanEntity> findAll();
     

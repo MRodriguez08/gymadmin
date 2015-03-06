@@ -7,8 +7,7 @@ import org.hibernate.Query;
 
 import com.gymadmin.persistence.dao.CustomerDao;
 import com.gymadmin.persistence.entities.CustomerEntity;
-import com.mrodriguez.commons.persistence.HibernateUtil;
-import com.mrodriguez.commons.persistence.dao.impl.DaoImpl;
+import com.gymadmin.repository.HibernateUtil;
 
 /**
  *

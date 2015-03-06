@@ -3,12 +3,12 @@ package com.gymadmin.business;
 
 import com.gymadmin.business.impl.CustomerBusinessImpl;
 import com.gymadmin.business.impl.PaymentMethodBusinessImpl;
-import com.gymadmin.business.impl.PlanBusinessImpl;
+import com.gymadmin.business.impl.PlanServiceImpl;
 
 public class BusinessFactory {
     
-    public static PlanBusiness getPlanBusiness(){
-        return new PlanBusinessImpl();
+    public static PlanService getPlanBusiness(){
+        return new PlanServiceImpl();
     }
     
     public static CustomerBusiness getCustomerBusiness(){

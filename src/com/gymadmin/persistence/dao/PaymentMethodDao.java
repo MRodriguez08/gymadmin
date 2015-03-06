@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.gymadmin.persistence.entities.PaymentMethodEntity;
-import com.mrodriguez.commons.persistence.dao.Dao;
 
 
 /**

@@ -3,26 +3,43 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
+	
 	<display-name>GymAdmin</display-name>
-	<servlet>
-		<servlet-name>Faces Servlet</servlet-name>
-		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+	
+	<listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+	
+	<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/gymadmin/application-context.xml</param-value>
+    </context-param>
+    
+    <servlet>
+		<servlet-name>webapp</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<servlet-name>webapp</servlet-name>
+		<url-pattern>/web/*</url-pattern>
 	</servlet-mapping>
-	<context-param>
-		<description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
-		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-		<param-value>client</param-value>
-	</context-param>
-	<context-param>
-		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-		<param-value>resources.application</param-value>
-	</context-param>
-	<listener>
-		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-	</listener>
+	
+	<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+		     <param-name>com.sun.jersey.config.property.packages</param-name>
+		     <param-value>com.gymadmin.services</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

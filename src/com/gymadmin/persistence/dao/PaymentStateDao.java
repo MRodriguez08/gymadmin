@@ -6,7 +6,7 @@
 
 package com.gymadmin.persistence.dao;
 
-import com.mrodriguez.commons.persistence.dao.Dao;
+
 import com.gymadmin.persistence.entities.PaymentStateEntity;
 
 

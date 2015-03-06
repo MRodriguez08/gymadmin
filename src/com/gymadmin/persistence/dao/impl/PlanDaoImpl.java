@@ -10,20 +10,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Query;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Repository;
 
 import com.gymadmin.persistence.dao.PlanDao;
 import com.gymadmin.persistence.entities.PlanEntity;
-import com.mrodriguez.commons.persistence.HibernateUtil;
-import com.mrodriguez.commons.persistence.dao.impl.DaoImpl;
+import com.gymadmin.repository.HibernateUtil;
 
 /**
  *
  * @author mrodriguez
  */
+@ComponentScan
 public class PlanDaoImpl extends DaoImpl<Integer , PlanEntity> implements PlanDao {
     
 	public PlanEntity findByName(String name) {		
-		Query namedQuery = HibernateUtil.getSessionFactory().getCurrentSession().getNamedQuery("PlanEntity.findByName");
+		Query namedQuery = com.gymadmin.repository.HibernateUtil.getSessionFactory().getCurrentSession().getNamedQuery("PlanEntity.findByName");
 		namedQuery.setParameter("name", name);
 		return (PlanEntity)namedQuery.uniqueResult();		
 	}

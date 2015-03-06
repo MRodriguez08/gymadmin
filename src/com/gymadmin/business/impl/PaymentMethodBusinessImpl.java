@@ -5,12 +5,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.mrodriguez.commons.exceptions.BusinessException;
-import com.mrodriguez.commons.persistence.HibernateUtil;
 import com.gymadmin.business.PaymentMethodBusiness;
 import com.gymadmin.persistence.dao.PaymentMethodDao;
 import com.gymadmin.persistence.entities.PaymentMethodEntity;
 import com.gymadmin.persistence.PersistenceFactory;
+import com.gymadmin.repository.BusinessException;
+import com.gymadmin.repository.HibernateUtil;
 
 
 /**

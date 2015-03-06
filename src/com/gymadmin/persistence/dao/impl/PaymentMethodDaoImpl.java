@@ -13,8 +13,7 @@ import org.hibernate.Query;
 
 import com.gymadmin.persistence.dao.PaymentMethodDao;
 import com.gymadmin.persistence.entities.PaymentMethodEntity;
-import com.mrodriguez.commons.persistence.HibernateUtil;
-import com.mrodriguez.commons.persistence.dao.impl.DaoImpl;
+import com.gymadmin.repository.HibernateUtil;
 
 /**
  *

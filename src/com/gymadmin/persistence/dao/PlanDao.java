@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.gymadmin.persistence.entities.PlanEntity;
-import com.mrodriguez.commons.persistence.dao.Dao;
 
 /**
  *

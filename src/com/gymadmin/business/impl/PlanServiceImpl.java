@@ -4,26 +4,29 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Repository;
 
-import com.mrodriguez.commons.exceptions.BusinessException;
-import com.mrodriguez.commons.persistence.HibernateUtil;
-import com.gymadmin.business.PlanBusiness;
+import com.gymadmin.business.PlanService;
 import com.gymadmin.persistence.dao.PlanDao;
 import com.gymadmin.persistence.entities.PlanEntity;
 import com.gymadmin.persistence.PersistenceFactory;
+import com.gymadmin.repository.BusinessException;
+import com.gymadmin.repository.HibernateUtil;
 
 
 /**
  *
  * @author mrodriguez
  */
-public class PlanBusinessImpl implements PlanBusiness {
+@ComponentScan
+public class PlanServiceImpl implements PlanService {
 	
-	private static Logger logger = Logger.getLogger(PlanBusinessImpl.class);
+	private static Logger logger = Logger.getLogger(PlanServiceImpl.class);
     
     private PlanDao planDao = null;
     
-    public PlanBusinessImpl(){
+    public PlanServiceImpl(){
         planDao = PersistenceFactory.getPlanDao();
     }
     
