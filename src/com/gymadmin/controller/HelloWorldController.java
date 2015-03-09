@@ -19,6 +19,6 @@ public class HelloWorldController {
     	
     	
         String message = "Hello World, Spring 3.0!";
-        return new ModelAndView("index", "message", message);
+        return new ModelAndView("plans", "message", message);
     }
 }
