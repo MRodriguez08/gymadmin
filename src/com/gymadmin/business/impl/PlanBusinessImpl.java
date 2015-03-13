@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 
-import com.gymadmin.business.PlanService;
+import com.gymadmin.business.PlanBusiness;
 import com.gymadmin.persistence.dao.PlanDao;
 import com.gymadmin.persistence.entities.PlanEntity;
 import com.gymadmin.persistence.PersistenceFactory;
@@ -20,15 +21,16 @@ import com.gymadmin.repository.HibernateUtil;
  * @author mrodriguez
  */
 @ComponentScan
-public class PlanServiceImpl implements PlanService {
+public class PlanBusinessImpl implements PlanBusiness {
 	
-	private static Logger logger = Logger.getLogger(PlanServiceImpl.class);
+	private static Logger logger = Logger.getLogger(PlanBusinessImpl.class);
     
     private PlanDao planDao = null;
     
-    public PlanServiceImpl(){
-        planDao = PersistenceFactory.getPlanDao();
-    }
+	@Autowired
+	public PlanBusinessImpl(PlanDao planDao) {
+		this.planDao = planDao;
+	}
     
     public List<PlanEntity> findAll(){
     	HibernateUtil.getSessionFactory().getCurrentSession().beginTransaction();

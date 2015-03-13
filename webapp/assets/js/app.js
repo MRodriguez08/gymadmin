@@ -1,5 +1,7 @@
 
+/**
+ * 
+ */
 angular.module('GymAdminApp', [
-  'GymAdminApp.controllers',
-  'GymAdminApp.services'
+  'GymAdminApp.controllers'
 ])

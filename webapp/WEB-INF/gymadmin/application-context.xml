@@ -52,11 +52,12 @@
 	<context:component-scan	base-package="com.gymadmin.persistence.dao.impl" />
 	
 	<!-- SERVICES -->
-	<context:component-scan base-package="com.gymadmin.business.impl" />
+	<context:component-scan base-package="com.gymadmin.business.impl" />	
 	
+	<context:component-scan base-package="com.gymadmin.services.*" />
 	
 	<!-- SERVICES -->
-	<bean id="planService" class="com.gymadmin.business.impl.PlanServiceImpl"></bean>
+	<bean id="planBusiness" class="com.gymadmin.business.impl.PlanBusinessImpl"></bean>
 	
 	<!-- DAOS -->
 	<bean id="planDao" class="com.gymadmin.persistence.dao.impl.PlanDaoImpl"></bean>

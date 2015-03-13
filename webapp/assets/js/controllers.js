@@ -1,12 +1,28 @@
 
 angular.module('GymAdminApp.controllers', [])
-	.controller('PlanListCtrl', function ($scope) {
-  $scope.plans = [
-    {'name': 'Nexus S',
-     'id' : 1},
-    {'name': 'Motorola XOOM™ with Wi-Fi',
-     'id' : 2},
-    {'name': 'MOTOROLA XOOM™',
-     'id' : 3}
-  ];
-});
+	.controller('driversController', function($scope) {
+	    $scope.driversList = [
+          {
+              Driver: {
+                  givenName: 'Sebastian',
+                  familyName: 'Vettel'
+              },
+              points: 322,
+              nationality: "German",
+              Constructors: [
+                  {name: "Red Bull"}
+              ]
+          },
+          {
+              Driver: {
+              givenName: 'Fernando',
+                  familyName: 'Alonso'
+              },
+              points: 207,
+              nationality: "Spanish",
+              Constructors: [
+                  {name: "Ferrari"}
+              ]
+          }
+        ];
+    });
