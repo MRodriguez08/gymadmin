@@ -25,7 +25,7 @@ import javax.persistence.Table;
 		query = "SELECT e FROM CustomerEntity e " +
 				"WHERE upper(e.name) LIKE :name AND upper(e.surname) LIKE :surname AND upper(e.email) LIKE :email")
 })
-public class CustomerEntity extends BaseEntity implements Serializable {
+public class CustomerEntity implements Serializable {
     
     /**
 	 * 

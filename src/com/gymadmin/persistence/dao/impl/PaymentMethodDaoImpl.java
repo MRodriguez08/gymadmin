@@ -9,11 +9,10 @@ package com.gymadmin.persistence.dao.impl;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
+import javax.persistence.Query;
 
 import com.gymadmin.persistence.dao.PaymentMethodDao;
 import com.gymadmin.persistence.entities.PaymentMethodEntity;
-import com.gymadmin.repository.HibernateUtil;
 
 /**
  *
@@ -21,19 +20,19 @@ import com.gymadmin.repository.HibernateUtil;
  */
 public class PaymentMethodDaoImpl extends DaoImpl<Integer , PaymentMethodEntity> implements PaymentMethodDao {
     
-	public PaymentMethodEntity findByName(String name) {		
-		Query namedQuery = HibernateUtil.getSessionFactory().getCurrentSession().getNamedQuery("PaymentMethodEntity.findByName");
+	public PaymentMethodEntity findByName(String name) {
+		Query namedQuery = em.createNamedQuery("PaymentMethodEntity.findByName");
 		namedQuery.setParameter("name", name);
-		return (PaymentMethodEntity)namedQuery.uniqueResult();		
+		return (PaymentMethodEntity)namedQuery.getSingleResult();		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PaymentMethodEntity> findByFilters(Map<String, String> filters) {		
-		Query namedQuery = HibernateUtil.getSessionFactory().getCurrentSession().getNamedQuery("PaymentMethodEntity.findByFilters");
+		Query namedQuery = em.createNamedQuery("PaymentMethodEntity.findByFilters");
 		namedQuery.setParameter("name", "%" + filters.get("name").toUpperCase() + "%");
 		namedQuery.setParameter("description", "%" + filters.get("description").toUpperCase() + "%");
-		return (List<PaymentMethodEntity>)namedQuery.list();
+		return (List<PaymentMethodEntity>)namedQuery.getResultList();
 	}
 	
 }

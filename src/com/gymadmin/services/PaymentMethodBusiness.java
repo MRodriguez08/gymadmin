@@ -1,4 +1,4 @@
-package com.gymadmin.business;
+package com.gymadmin.services;
 
 import java.util.List;
 import java.util.Map;

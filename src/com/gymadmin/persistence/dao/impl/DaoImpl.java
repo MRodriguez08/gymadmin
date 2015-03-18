@@ -1,21 +1,13 @@
 package com.gymadmin.persistence.dao.impl;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
-
 import org.springframework.transaction.annotation.Transactional;
-
-import org.hibernate.Session;
 
 import com.gymadmin.persistence.dao.Dao;
 
@@ -24,7 +16,7 @@ public abstract class DaoImpl<K, E> implements Dao<K, E>{
 
     protected Class<E> entityClass;
 
-    private EntityManager em = null;
+    protected EntityManager em = null;
 
 	@PersistenceContext
 	public void setEntityManager(EntityManager em) {

@@ -16,6 +16,7 @@
 	<!-- Scans the classpath of this application for @Components to deploy as 
 		beans -->
 	<context:component-scan base-package="com.gymadmin.controller" />
+	<context:component-scan base-package="com.gymadmin.rest" />
 
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />

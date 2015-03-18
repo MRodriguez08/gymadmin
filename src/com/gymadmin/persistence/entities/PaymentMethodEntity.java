@@ -22,7 +22,7 @@ import javax.persistence.Table;
 			query = "SELECT e FROM PaymentMethodEntity e " +
 					"WHERE upper(e.name) LIKE :name AND upper(e.description) LIKE :description")
 })
-public class PaymentMethodEntity extends BaseEntity implements Serializable {
+public class PaymentMethodEntity implements Serializable {
     
     /**
 	 * 

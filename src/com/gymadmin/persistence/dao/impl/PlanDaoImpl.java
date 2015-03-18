@@ -9,33 +9,32 @@ package com.gymadmin.persistence.dao.impl;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
+import javax.persistence.Query;
+
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Repository;
 
 import com.gymadmin.persistence.dao.PlanDao;
 import com.gymadmin.persistence.entities.PlanEntity;
-import com.gymadmin.repository.HibernateUtil;
 
 /**
  *
  * @author mrodriguez
  */
-@ComponentScan
+//@ComponentScan
 public class PlanDaoImpl extends DaoImpl<Integer , PlanEntity> implements PlanDao {
     
 	public PlanEntity findByName(String name) {		
-		Query namedQuery = com.gymadmin.repository.HibernateUtil.getSessionFactory().getCurrentSession().getNamedQuery("PlanEntity.findByName");
+		Query namedQuery = em.createNamedQuery("PlanEntity.findByName");
 		namedQuery.setParameter("name", name);
-		return (PlanEntity)namedQuery.uniqueResult();		
+		return (PlanEntity)namedQuery.getSingleResult();		
 	}
 
 	@Override
-	public List<PlanEntity> findByFilters(Map<String, String> filters) {		
-		Query namedQuery = HibernateUtil.getSessionFactory().getCurrentSession().getNamedQuery("PlanEntity.findByFilters");
+	public List<PlanEntity> findByFilters(Map<String, String> filters) {	
+		Query namedQuery = em.createNamedQuery("PlanEntity.findByFilters");
 		namedQuery.setParameter("name", "%" + filters.get("name").toUpperCase() + "%");
 		namedQuery.setParameter("description", "%" + filters.get("description").toUpperCase() + "%");
-		return (List<PlanEntity>)namedQuery.list();
+		return (List<PlanEntity>)namedQuery.getResultList();
 	}
 	
 	

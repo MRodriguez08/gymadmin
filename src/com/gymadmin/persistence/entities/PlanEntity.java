@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "plans")
 @NamedQueries( { 
@@ -25,7 +27,7 @@ import javax.persistence.Table;
 			query = "SELECT e FROM PlanEntity e " +
 					"WHERE upper(e.name) LIKE :name AND upper(e.description) LIKE :description")
 })
-public class PlanEntity extends BaseEntity implements Serializable  {
+public class PlanEntity implements Serializable  {
     
     /**
 	 * 
@@ -47,9 +49,11 @@ public class PlanEntity extends BaseEntity implements Serializable  {
     @Column(name = "cost")
     private Float cost;
     
+    @JsonIgnore
     @OneToMany(mappedBy="plan", fetch=FetchType.LAZY)
     private List<PaymentEntity> payments;
     
+    @JsonIgnore
     @OneToMany(mappedBy="currentPlan", fetch=FetchType.LAZY)
     private List<CustomerEntity> customers;
     
