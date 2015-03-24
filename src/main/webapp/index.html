@@ -1,0 +1,48 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<!-- SCROLLS -->
+<!-- load bootstrap and fontawesome via CDN -->
+<link rel="stylesheet"
+	href="assets/css/bootstrap.min.css" />
+
+<!-- SPELLS -->
+<!-- load angular and angular route via CDN -->
+<script
+	src="assets/js/libs/angular.min.js"></script>
+<script
+	src="assets/js/libs/angular-route.min.js"></script>
+
+<script src="app.js"></script>
+<script src="controllers/plans.js"></script>
+
+
+</head>
+<body ng-app="gymAdmin" ng-controller="mainController">
+
+	<!-- HEADER AND NAVBAR -->
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/">Angular Routing Example</a>
+				</div>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#payments"><i class="fa fa-home"></i> Payments</a></li>
+					<li><a href="#customers"><i class="fa fa-shield"></i> Customers</a></li>
+					<li><a href="#plans"><i class="fa fa-comment"></i> Plans</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<!-- MAIN CONTENT AND INJECTED VIEWS -->
+	<div id="main">
+		{{ message }}
+		<div ng-view></div>
+	</div>
+
+</body>
+</html>
