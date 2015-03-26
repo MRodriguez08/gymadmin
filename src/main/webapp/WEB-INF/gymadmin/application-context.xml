@@ -59,6 +59,8 @@
 	<!-- DAOS -->
 	<context:component-scan	base-package="com.gymadmin.persistence.dao.impl" />
 	
+	<context:component-scan	base-package="com.gymadmin.config" />
+	
 	<!-- SERVICES -->
 	<!-- <context:component-scan base-package="com.gymadmin.business.impl" />  -->
 		
