@@ -25,7 +25,5 @@
 	<mvc:annotation-driven />
 
 	<context:annotation-config />
-
- 	<mvc:resources mapping="/web/**" location="/" />
 	
 </beans>

@@ -21,7 +21,6 @@
    		http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<!-- holding properties for database connectivity / -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
 
 	<!-- enabling annotation driven configuration / -->
@@ -29,6 +28,8 @@
 	
 	<mvc:annotation-driven />
 
+
+	<!-- ############################# DATA SOURCE AND TRANSACTION MANAGEMENT ############################# -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -53,19 +54,6 @@
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
 		p:entityManagerFactory-ref="entityManagerFactory" />
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
-	<!-- DAOS -->
-	<context:component-scan	base-package="com.gymadmin.persistence.dao.impl" />
-	
-	<context:component-scan	base-package="com.gymadmin.config" />
-	
-	<!-- SERVICES -->
-	<!-- <context:component-scan base-package="com.gymadmin.business.impl" />  -->
-		
-	<!-- SERVICES -->
-	<bean id="planBusiness" class="com.gymadmin.services.impl.PlanServiceImpl"></bean>
 	
 	<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -84,9 +72,32 @@
         <aop:pointcut id="serviceLayerMethods" expression="execution(* com.gymadmin.services.impl.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceLayerMethods"/>
     </aop:config>
+    
+   	<tx:annotation-driven transaction-manager="transactionManager" />
+    
+    <!-- ############################# DATA SOURCE AND TRANSACTION MANAGEMENT ############################# -->
+    
+    <!-- ############################# COMPONENT SCAN ############################# -->
+    <!-- APP CONFIGURATION -->
+    <context:component-scan	base-package="com.gymadmin.config" />
+    
+    <context:component-scan	base-package="com.gymadmin.controller" />
+    
+    <!-- DAOS -->
+	<context:component-scan	base-package="com.gymadmin.persistence.dao.impl" />	
 	
+	<!-- SERVICES -->
+	<!-- <context:component-scan base-package="com.gymadmin.business.impl" />  -->	
+	<!-- ############################# COMPONENT SCAN ############################# -->
+	
+	
+	<!-- ############################# BEANS ############################# -->
 	<!-- DAOS -->
 	<bean id="planDao" class="com.gymadmin.persistence.dao.impl.PlanDaoImpl"></bean>
+	
+	<!-- SERVICES -->
+	<bean id="planBusiness" class="com.gymadmin.services.impl.PlanServiceImpl"></bean>
+	<!-- ############################# BEANS ############################# -->
 	
 
 </beans>

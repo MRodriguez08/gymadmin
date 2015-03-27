@@ -15,8 +15,9 @@
 	<context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/gymadmin/application-context.xml</param-value>
-    </context-param>
     
+    </context-param>
+
    <servlet>
 		<servlet-name>webapp</servlet-name>
 		<servlet-class>
@@ -25,9 +26,10 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+
 	<servlet-mapping>
 		<servlet-name>webapp</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
-	
+
 </web-app>
