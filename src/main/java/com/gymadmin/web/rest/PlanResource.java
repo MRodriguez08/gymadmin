@@ -1,4 +1,4 @@
-package com.gymadmin.rest;
+package com.gymadmin.web.rest;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,11 +20,11 @@ public class PlanResource {
 	private static final Logger logger = Logger.getLogger(PlanResource.class);
 
 	@Autowired
-	private PlanService planBusiness;	
+	private PlanService planService;	
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<PlanEntity> getAll() {
-		List<PlanEntity> plansList = planBusiness.findAll();
+		List<PlanEntity> plansList = planService.findAll();
 		return plansList;
 	}
 	
@@ -32,7 +32,7 @@ public class PlanResource {
 	public PlanEntity get(@PathVariable Integer id) {
 		PlanEntity plan = null;
 		try {
-			plan = planBusiness.get(id);
+			plan = planService.get(id);
 		} catch (Exception e) {
 			logger.error(getClass() , e);
 		}

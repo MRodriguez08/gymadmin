@@ -1,4 +1,4 @@
-package com.gymadmin.rest;
+package com.gymadmin.web.rest;
 
 import java.security.Principal;
 

@@ -81,23 +81,13 @@
     <!-- APP CONFIGURATION -->
     <context:component-scan	base-package="com.gymadmin.config" />
     
-    <context:component-scan	base-package="com.gymadmin.controller" />
+    <context:component-scan	base-package="com.gymadmin.security" />
     
     <!-- DAOS -->
 	<context:component-scan	base-package="com.gymadmin.persistence.dao.impl" />	
 	
 	<!-- SERVICES -->
 	<!-- <context:component-scan base-package="com.gymadmin.business.impl" />  -->	
-	<!-- ############################# COMPONENT SCAN ############################# -->
-	
-	
-	<!-- ############################# BEANS ############################# -->
-	<!-- DAOS -->
-	<bean id="planDao" class="com.gymadmin.persistence.dao.impl.PlanDaoImpl"></bean>
-	
-	<!-- SERVICES -->
-	<bean id="planBusiness" class="com.gymadmin.services.impl.PlanServiceImpl"></bean>
-	<!-- ############################# BEANS ############################# -->
-	
+	<!-- ############################# COMPONENT SCAN ############################# -->	
 
 </beans>

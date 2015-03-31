@@ -17,12 +17,13 @@
 	</repositories>
 
 	<properties>
-		<jdk.version>1.7</jdk.version>
+		<jdk.version>1.8</jdk.version>
 		<quartz-scheduler.version>2.2.1</quartz-scheduler.version>
 		<hibernate.version>4.3.1.Final</hibernate.version>
 		<log4j.version>1.2.16</log4j.version>
 		<primafaces.version>5.0</primafaces.version>
 		<spring.version>4.1.1.RELEASE</spring.version>
+		<javax.inject.version>1</javax.inject.version>
 	</properties>
 
 
@@ -40,6 +41,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${javax.inject.version}</version>
 		</dependency>
 
 		<!-- quartz sheduler -->
@@ -134,14 +141,35 @@
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>3.2.6.RELEASE</version>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.2.2.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.2.2.RELEASE</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.2.6.RELEASE</version>
+			<version>3.2.2.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>1.9.1.RELEASE</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons-core</artifactId>
+			<version>1.1.0.RELEASE</version>
+		</dependency>
+
 
 		<!-- <dependency> <groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-core</artifactId> 
 			<version>2.4.3</version> </dependency> -->
@@ -177,7 +205,7 @@
 				<configuration>
 					<!-- Always download and attach dependencies source code -->
 					<downloadSources>true</downloadSources>
-					<downloadJavadocs>false</downloadJavadocs>
+					<downloadJavadocs>true</downloadJavadocs>
 					<!-- Avoid type mvn eclipse:eclipse -Dwtpversion=2.0 -->
 					<wtpversion>2.0</wtpversion>
 				</configuration>
@@ -194,14 +222,6 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.3</version>

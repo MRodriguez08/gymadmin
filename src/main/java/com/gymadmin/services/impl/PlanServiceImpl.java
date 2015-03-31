@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.gymadmin.persistence.dao.PlanDao;
 import com.gymadmin.persistence.entities.PlanEntity;
@@ -15,6 +16,7 @@ import com.gymadmin.services.PlanService;
  *
  * @author mrodriguez
  */
+@Component("planService")
 public class PlanServiceImpl implements PlanService {
 
 	private static Logger logger = Logger.getLogger(PlanServiceImpl.class);
