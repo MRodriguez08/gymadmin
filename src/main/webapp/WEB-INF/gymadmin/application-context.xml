@@ -78,16 +78,19 @@
     <!-- ############################# DATA SOURCE AND TRANSACTION MANAGEMENT ############################# -->
     
     <!-- ############################# COMPONENT SCAN ############################# -->
+    
     <!-- APP CONFIGURATION -->
     <context:component-scan	base-package="com.gymadmin.config" />
     
+    <!-- SECURITY -->
     <context:component-scan	base-package="com.gymadmin.security" />
     
     <!-- DAOS -->
-	<context:component-scan	base-package="com.gymadmin.persistence.dao.impl" />	
+	<context:component-scan	base-package="com.gymadmin.persistence.dao.impl" />
 	
 	<!-- SERVICES -->
-	<!-- <context:component-scan base-package="com.gymadmin.business.impl" />  -->	
+	<context:component-scan	base-package="com.gymadmin.services.impl" />	
+	
 	<!-- ############################# COMPONENT SCAN ############################# -->	
 
 </beans>

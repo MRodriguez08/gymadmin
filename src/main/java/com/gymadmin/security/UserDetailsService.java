@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Component("userDetailsService")
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
-    private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
+    private final Logger logger = LoggerFactory.getLogger(UserDetailsService.class);
 
     @Autowired
     private UserDao userDao;
@@ -31,9 +31,10 @@ public class UserDetailsService implements org.springframework.security.core.use
     @Override
     @Transactional
     public UserDetails loadUserByUsername(final String login) {
-        log.debug("Authenticating {}", login);
+
+    	logger.debug("Authenticating {}", login);
         String lowercaseLogin = login.toLowerCase();
-        Optional<UserEntity> userFromDatabase =  userDao.findByNick(lowercaseLogin); 
+        Optional<UserEntity> userFromDatabase =  Optional.ofNullable(userDao.findByNick(lowercaseLogin)); 
         return userFromDatabase.map(user -> {
             if (!user.getEnabled()) {
                 throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");

@@ -6,18 +6,12 @@
 
 package com.gymadmin.persistence.dao.impl;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
-import com.gymadmin.persistence.dao.PlanDao;
 import com.gymadmin.persistence.dao.UserDao;
-import com.gymadmin.persistence.entities.PlanEntity;
 import com.gymadmin.persistence.entities.UserEntity;
 
 /**
@@ -27,10 +21,14 @@ import com.gymadmin.persistence.entities.UserEntity;
 @Component("userDao")
 public class UserDaoImpl extends DaoImpl<String , UserEntity> implements UserDao {
     
-	public Optional<UserEntity> findByNick(String nick) {		
+	public UserEntity findByNick(String nick) {		
 		Query namedQuery = em.createNamedQuery("UserEntity.findByNick");
-		namedQuery.setParameter("name", nick);
-		return Optional.of((UserEntity)namedQuery.getSingleResult());		
+		namedQuery.setParameter("nick", nick);
+		try {
+			return (UserEntity)namedQuery.getSingleResult();	
+		} catch (NoResultException e) {
+			return null;
+		}			
 	}
 	
 	

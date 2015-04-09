@@ -1,0 +1,16 @@
+{
+    "plan": {
+        "title": "List plans",
+        "form": {
+            "name": "Name",
+            "password": "Your password",
+            "rememberme": "Automatic Login",
+            "button": "Authenticate"
+        },
+        "messages": {
+            "error": {
+                "authentication": "<strong>Authentication failed!</strong> Please check your credentials and try again."
+            }
+        }
+    }
+}

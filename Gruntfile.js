@@ -1,90 +1,62 @@
+/**
+ * 
+ */
+
 module.exports = function(grunt) {
 
+  // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
-    /****
-    * Concateno las librerias de cada pagina en un unico archivo javascript
-    ****/
-    concat: {
-      options: {
-        stripBanners: true,
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-          '<%= grunt.template.today("yyyy-mm-dd") %> */',
-        separator: ';'
-      },
-      /****
-      * Librerias y codigo del Home
-      ****/
-      application: {
-        src: [
-          'src/main/webapp/assets/app.js',         
-          'src/main/webapp/assets/controllers/app.js',
-        ],
-        dest: 'build/libs/libs_home.js'
-      }
-    },
-
-    /****
-    * Minifica, comprime, elimina comentarios, etc
-    ****/
     uglify: {
-      my_target: {
-        files: [{
-            expand: true,
-            cwd: '../curvometal-web',
-            src: ['build/*.js', 'build/libs/*.js'],
-            dest: 'build/min/'
-        }]
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+        src: 'src/main/webapp/scripts/<%= pkg.name %>.js',
+        dest: 'build/<%= pkg.name %>.min.js'
       }
     },
-
-    /****
-    * Chequeo de calidad del codigo
-    ****/
-    gjslint: {
-      options: {
-        reporter: {
-          name: 'console'
-        },
-        force: false
-      },
-      lib: {
-        src: ['js/*.js', '!js/custom.js'],
-      }
-    },
-
-    /****
-    * Autocorreccion de errores de codigo
-    ****/
-    fixjsstyle: {
-      options: {
-        reporter: {
-          name: 'console'
-        },
-        force: false
-      },
-      lib: {
-        src: ['js/*.js'],
-      }
-    },  
+    
+    copy: {
+	  assets: {
+		  expand: true, 
+		  src: [
+            'node_modules/angular/angular.min.js', 
+            'node_modules/angular/angular.min.js.map',
+            'node_modules/bootstrap/dist/css/bootstrap.min.css', 
+            'node_modules/bootstrap/dist/css/bootstrap.css.map',
+            'node_modules/bootstrap/dist/fonts/*', 
+            'node_modules/bootstrap/dist/js/bootstrap.min.js',
+            'node_modules/angular-route/angular-route.min.js', 
+            'node_modules/angular-route/angular-route.min.js.map',
+            'node_modules/jquery/dist/jquery.min.js', 
+            'node_modules/jquery/dist/jquery.min.map',
+            'node_modules/angular-translate/dist/angular-translate.min.js',
+            'node_modules/angular-local-storage/dist/angular-local-storage.min.js',
+            'node_modules/angular-dynamic-locale/tmhDynamicLocale.min.js', 
+            'node_modules/angular-dynamic-locale/tmhDynamicLocale.min.js.map',
+            'node_modules/angular-resource/angular-resource.min.js', 
+            'node_modules/angular-resource/angular-resource.min.js.map',
+            'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+            'node_modules/angular-cookies/angular-cookies.min.js', 
+            'node_modules/angular-cookies/angular-cookies.min.js.map',
+            'node_modules/angular-cache-buster/angular-cache-buster.js',
+            'node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
+            'node_modules/angular-translate/dist/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
+            'node_modules/angular-i18n/*'
+            ], 
+          dest: 'src/main/webapp/', 
+		  filter: 'isFile'
+		  
+	  },
+    }
     
   });
 
-  grunt.loadNpmTasks('grunt-gjslint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-concat');  
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-html-convert');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks("grunt-phplint");
-  grunt.loadNpmTasks("grunt-phpcs");
 
-  grunt.registerTask('template', ['htmlConvert']);
-  grunt.registerTask('quality', ['gjslint']);
-  grunt.registerTask('fixquality', ['fixjsstyle']);
-  grunt.registerTask('compile', ['quality','htmlConvert', 'concat', 'uglify']);
-  grunt.registerTask('deploy', ['compile', 'copy:noImages']);
+  // Default task(s).
+  grunt.registerTask('copy-all', ['copy:assets']);
 
 };

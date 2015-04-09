@@ -3,6 +3,7 @@ package com.gymadmin.config;
 import com.gymadmin.security.*;
 import com.gymadmin.web.filters.CsrfCookieGeneratorFilter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -20,17 +21,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.csrf.CsrfFilter;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-    @Inject
-    private Environment env;
 
     @Inject
     private AjaxAuthenticationSuccessHandler ajaxAuthenticationSuccessHandler;
@@ -46,9 +44,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Inject
     private UserDetailsService userDetailsService;
-//
-//    @Inject
-//    private RememberMeServices rememberMeServices;
+    
+    @Autowired
+	DataSource dataSource;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -66,13 +64,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
             .antMatchers("/scripts/**/*.{js,html}")
-            .antMatchers("/bower_components/**")
-            .antMatchers("/i18n/**")
-            .antMatchers("/assets/**")
-            .antMatchers("/swagger-ui/**")
-            .antMatchers("/test/**")
-            .antMatchers("/console/**");
+            .antMatchers("/node_modules/**");
     }
+    
+//	@Autowired
+//	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+// 
+//	  auth.jdbcAuthentication().dataSource(dataSource)
+//		.usersByUsernameQuery(
+//			"select nick as username, passwordx, enabled from users where nick=?")
+//		.authoritiesByUsernameQuery(
+//			"select user_id as username, authority_name as role from users_authorities where user_id=?");
+//	}
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -80,10 +83,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .addFilterAfter(new CsrfCookieGeneratorFilter(), CsrfFilter.class)
             .exceptionHandling()
             .authenticationEntryPoint(authenticationEntryPoint)
-//        .and()
-//            .rememberMe()
-//            .rememberMeServices(rememberMeServices)
-//            .key(env.getProperty("gymadmin.security.rememberme.key"))
         .and()
             .formLogin()
             .loginProcessingUrl("/api/authentication")
@@ -103,24 +102,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .frameOptions()
             .disable()
             .authorizeRequests()
-                .antMatchers("/api/register").permitAll()
-                .antMatchers("/api/activate").permitAll()
+            	.antMatchers("/api/register").permitAll()
                 .antMatchers("/api/authenticate").permitAll()
-                .antMatchers("/api/logs/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/api/**").authenticated()
-                .antMatchers("/metrics/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/health/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/trace/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/dump/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/shutdown/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/beans/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/configprops/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/info/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/autoconfig/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/env/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/trace/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/api-docs/**").hasAuthority(AuthoritiesConstants.ADMIN)
-                .antMatchers("/protected/**").authenticated();
+                .antMatchers("/api/**").authenticated();
 
     }
 

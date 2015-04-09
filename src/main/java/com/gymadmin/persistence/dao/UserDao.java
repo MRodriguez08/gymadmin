@@ -11,6 +11,6 @@ import com.gymadmin.persistence.entities.UserEntity;
  */
 public interface UserDao extends Dao<String , UserEntity> {
 
-	public Optional<UserEntity> findByNick(String nick);
+	public UserEntity findByNick(String nick);
 	
 }

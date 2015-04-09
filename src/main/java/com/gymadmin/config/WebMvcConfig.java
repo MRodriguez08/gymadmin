@@ -11,8 +11,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-	    registry.addResourceHandler("/web/**").addResourceLocations("/assets/");
-	    //registry.addResourceHandler("/index.html").addResourceLocations("/index.html");
+	    registry.addResourceHandler("/assets/**").addResourceLocations("/node_modules/");
+	    registry.addResourceHandler("/index.html").addResourceLocations("/index.html");
+	    registry.addResourceHandler("/app/**").addResourceLocations("/scripts/app/");
+	    registry.addResourceHandler("/components/**").addResourceLocations("/scripts/components/");
+	    registry.addResourceHandler("/i18n/**").addResourceLocations("/i18n/");
 	}
 
 }

@@ -24,6 +24,7 @@
 		<primafaces.version>5.0</primafaces.version>
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<javax.inject.version>1</javax.inject.version>
+		<commons-lang.version>2.6</commons-lang.version>
 	</properties>
 
 
@@ -32,10 +33,10 @@
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -185,6 +186,12 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons-lang.version}</version>
 		</dependency>
 
 

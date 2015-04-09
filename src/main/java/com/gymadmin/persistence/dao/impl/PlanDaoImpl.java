@@ -11,7 +11,7 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import com.gymadmin.persistence.dao.PlanDao;
 import com.gymadmin.persistence.entities.PlanEntity;
@@ -20,7 +20,7 @@ import com.gymadmin.persistence.entities.PlanEntity;
  *
  * @author mrodriguez
  */
-//@ComponentScan
+@Component("planDao")
 public class PlanDaoImpl extends DaoImpl<Integer , PlanEntity> implements PlanDao {
     
 	public PlanEntity findByName(String name) {		
