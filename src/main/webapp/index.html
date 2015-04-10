@@ -5,22 +5,24 @@
 
 	<head>
 		<link rel="stylesheet" href="assets/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/ng-grid/css/ui-grid-stable.css" />
 	</head>
 	
 	<body ng-app="gymAdminApp">
 	
 		<div ui-view="navbar" ng-cloak=""></div>
-		<div ng-show="!Principal.isAuthenticated()">
-			You are not authenticated
-		</div>
+		
         <div class="container">
             <div class="well" ui-view="content"></div>
 
+<!-- 
             <div class="footer">
                 <p translate="footer">This is your footer</p>
             </div>
+-->
         </div>
-	
+ 
+ 	
 		<!-- SPELLS -->
 		<script	src="assets/jquery/dist/jquery.min.js"></script>
 		<script	src="assets/angular/angular.min.js"></script>
@@ -35,6 +37,7 @@
 		<script	src="assets/angular-cache-buster/angular-cache-buster.js"></script>
 		<script	src="assets/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
 		<script	src="assets/angular-translate/dist/angular-translate-loader-partial/angular-translate-loader-partial.min.js"></script>
+		<script	src="assets/ng-grid/js/ui-grid-stable.js"></script>		        
 		        
 		<script src="app/app.js"></script>
 		<script src="app/app.constants.js"></script>   
@@ -53,6 +56,7 @@
         <script src="app/main/main.controller.js"></script>      
         <script src="app/error/error.js"></script>   
 		        
+		
         <script src="components/auth/provider/auth.session.service.js"></script>
         <script src="components/auth/auth.service.js"></script>
         <script src="components/auth/principal.service.js"></script>
