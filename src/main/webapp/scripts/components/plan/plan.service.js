@@ -1,7 +1,8 @@
-'use strict';
+(function(){
+  'use strict';
 
-angular.module('gymAdminApp')
-    .factory('PlanService', function ($rootScope, $http) {
+  angular.module('gymAdminApp')
+    .factory('PlanService', ['$rootScope', '$http', function ($rootScope, $http) {
         return {
             getAll: function () {
                 return $http.get('api/plan').then(function (response) {
@@ -9,4 +10,6 @@ angular.module('gymAdminApp')
                 });
             }
         };
-    });
+    }]);
+  
+})();

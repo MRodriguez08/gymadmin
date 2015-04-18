@@ -56,11 +56,11 @@ module.exports = function(grunt) {
             'node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
             'node_modules/angular-translate/dist/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
             'node_modules/angular-i18n/*',
-            'node_modules/ng-grid/css/ui-grid-stable.css',
-            'node_modules/ng-grid/css/ui-grid.svg',
-            'node_modules/ng-grid/css/ui-grid.ttf',
-            'node_modules/ng-grid/css/ui-grid.woff',
-            'node_modules/ng-grid/js/ui-grid-stable.js'
+            'bower_components/angular-ui-grid/ui-grid.css',
+            'bower_components/angular-ui-grid/ui-grid.svg',
+            'bower_components/angular-ui-grid/ui-grid.ttf',
+            'bower_components/angular-ui-grid/ui-grid.woff',
+            'bower_components/angular-ui-grid/ui-grid.js'
             ], 
           dest: 'src/main/webapp/', 
 		  filter: 'isFile'
@@ -100,6 +100,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ng-constant');
 
   // Default task(s).
-  grunt.registerTask('copy-all', ['copy:assets']);
+  grunt.registerTask('make-all', ['copy:assets']);
 
 };

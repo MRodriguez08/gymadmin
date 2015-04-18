@@ -4,5 +4,3 @@
 build/
 target/
 .project
-node_modules/
-bower_components/

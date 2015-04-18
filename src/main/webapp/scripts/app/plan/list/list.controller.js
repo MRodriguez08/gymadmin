@@ -1,19 +1,35 @@
-'use strict';
+(function() { 
+	'use strict';
 
-angular.module('gymAdminApp')
-    .controller('PlanController', function ($rootScope, $scope, $state, $timeout, PlanService) {
-    	    	   	
+	angular.module('gymAdminApp')
+    .controller('ListPlanController', ['$scope', '$log', 'PlanService', function ( $scope, $log, PlanService) {
+    	
+    	/**
+    	 * Update action
+    	 */
+    	$scope.delete = function( ) {
+            alert('updating plan...');
+        };
+        
     	$scope.plansList = '';
+    	$scope.gridScope = $scope;
     	$scope.gridOptions = {
-    	        enableSorting: true,
-    	        columnDefs: [
-    	          { displayName:'Id', field: 'id', width:100 },
-    	          { displayName:'Nombre', field: 'name', width:150 },
-    	          { displayName:'Descripcion', field: 'description', width:150 },
-    	          { displayName:'Costo', field: 'cost', width:100 }
-    	        ],
-    	        data: 'plansList',
-            };
+	        enableSorting: true,
+	        columnDefs: [
+	          { displayName:'Id', field: 'id', maxWidth : 80 },
+	          { displayName:'Nombre', field: 'name'},
+	          { displayName:'Descripcion', field: 'description' },
+	          { displayName:'Costo', field: 'cost', maxWidth : 80},
+	          { name: 'ShowScope', cellTemplate:'<button class="btn primary" ng-click="grid.appScope.delete()">Click Me</button>' }  
+	        ],
+	        data: 'plansList',
+        };
+    	
+    	
+    	
+    	/**
+    	 * Refresh grid action
+    	 */
     	$scope.refresh = function () {        	
             $scope.updatingPlans = true;
             $scope.errorMessage = '';
@@ -30,4 +46,5 @@ angular.module('gymAdminApp')
             });
         };
         $scope.refresh();        
-    });
+    }]);
+})() ;

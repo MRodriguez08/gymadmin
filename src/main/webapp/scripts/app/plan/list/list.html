@@ -1,10 +1,12 @@
 <div>
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-12">
             <h1 translate="plan.title">Plan list</h1>
-            <div class="table-responsive">
-		     	<div id="grid1" ui-grid="gridOptions" class="grid"></div>
-		    </div>
+		    <div class="grid" ui-grid="gridOptions" ui-grid-auto-resize></div>
+        </div>
+         <div class="col-md-12">
+            <button translate="global.buttons.refresh" type="button" class="btn btn-success" ng-click="refresh()">Refresh</button>
+            <button translate="global.buttons.create" type="button" class="btn btn-success" ng-click="go(/createPlan)">Create</button>
         </div>
     </div>
 </div>
