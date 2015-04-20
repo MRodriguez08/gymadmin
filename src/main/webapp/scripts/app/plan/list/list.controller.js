@@ -20,7 +20,8 @@
 	          { displayName:'Nombre', field: 'name'},
 	          { displayName:'Descripcion', field: 'description' },
 	          { displayName:'Costo', field: 'cost', maxWidth : 80},
-	          { name: 'ShowScope', cellTemplate:'<button class="btn primary" ng-click="grid.appScope.delete()">Click Me</button>' }  
+	          { name: ' ', cellTemplate:'<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete()"></span>', maxWidth : 20 },  
+	          { name: '  ', cellTemplate:'<span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.delete()"></span>', maxWidth : 20  }
 	        ],
 	        data: 'plansList',
         };
@@ -33,7 +34,7 @@
     	$scope.refresh = function () {        	
             $scope.updatingPlans = true;
             $scope.errorMessage = '';
-            PlanService.getAll().then(function (response) {
+            PlanService.getAll({} , function (response) {
                 $scope.plansList = response;
                 $scope.updatingPlans = false;
             }, function (response) {

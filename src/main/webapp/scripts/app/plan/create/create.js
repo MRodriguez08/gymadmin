@@ -8,7 +8,7 @@
                 parent: 'plan',
                 url: '/createPlan',
                 data: {
-                    roles: [], 
+                	roles: ['ROLE_ADMIN'], 
                     pageTitle: 'plan.title'
                 },
                 views: {

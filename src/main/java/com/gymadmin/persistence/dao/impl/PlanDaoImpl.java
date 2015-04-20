@@ -9,6 +9,7 @@ package com.gymadmin.persistence.dao.impl;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
@@ -26,7 +27,12 @@ public class PlanDaoImpl extends DaoImpl<Integer , PlanEntity> implements PlanDa
 	public PlanEntity findByName(String name) {		
 		Query namedQuery = em.createNamedQuery("PlanEntity.findByName");
 		namedQuery.setParameter("name", name);
-		return (PlanEntity)namedQuery.getSingleResult();		
+		try {
+			return (PlanEntity)namedQuery.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+				
 	}
 
 	public List<PlanEntity> findByFilters(Map<String, String> filters) {	

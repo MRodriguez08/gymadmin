@@ -5,7 +5,8 @@
         	"edit" : "Editar",
         	"refresh" : "Refrescar",
         	"delete" : "Eliminar",
-        	"create" : "Crear"
+        	"create" : "Crear",
+        	"back" : "Volver"
         },
         "menu": {
             "home": "Home",

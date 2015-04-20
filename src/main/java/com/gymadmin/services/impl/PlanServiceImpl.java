@@ -36,17 +36,18 @@ public class PlanServiceImpl implements PlanService {
 		return users;
 	}
 
-	public void create(PlanEntity d) throws Exception {
+	public PlanEntity create(PlanEntity d) throws Exception {
 		PlanEntity p = planDao.findByName(d.getName());
 		if (p != null)
 			throw new BusinessException("Ya existe un plan con ese nombre");
 
 		planDao.persist(d);
-
+		return d;
 	}
 
-	public void edit(PlanEntity d) throws Exception {		
+	public PlanEntity edit(PlanEntity d) throws Exception {		
 		planDao.merge(d);		
+		return d;
 	}
 
 	public PlanEntity get(Integer id) throws Exception {

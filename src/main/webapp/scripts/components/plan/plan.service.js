@@ -2,13 +2,30 @@
   'use strict';
 
   angular.module('gymAdminApp')
-    .factory('PlanService', ['$rootScope', '$http', function ($rootScope, $http) {
+    .factory('PlanService', ['$rootScope', '$http', 'PlanResource', function ($rootScope, $http, PlanResource) {
         return {
-            getAll: function () {
-                return $http.get('api/plan').then(function (response) {
-                    return response.data;
-                });
-            }
+            getAll: function (data, callback) {
+                var cb = callback || angular.noop;
+
+                return PlanResource.query(data,
+                    function (response) {
+                        return cb(response);
+                    },
+                    function (err) {
+                        return cb(err);
+                    }.bind(this)).$promise;
+            },
+            create: function (data, callback) {
+                var cb = callback || angular.noop;
+
+                return PlanResource.save(data,
+                    function (response) {
+                        return cb(response);
+                    },
+                    function (err) {
+                        return cb(err);
+                    }.bind(this)).$promise;
+            },
         };
     }]);
   

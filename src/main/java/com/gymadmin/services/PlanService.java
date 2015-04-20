@@ -15,9 +15,9 @@ public interface PlanService {
     
     public List<PlanEntity> findByFilters(Map<String , String> filters);
     
-    public void create(PlanEntity e) throws Exception;
+    public PlanEntity create(PlanEntity e) throws Exception;
     
-    public void edit(PlanEntity e) throws Exception;
+    public PlanEntity edit(PlanEntity e) throws Exception;
     
     public PlanEntity get(Integer Id) throws Exception;
     
