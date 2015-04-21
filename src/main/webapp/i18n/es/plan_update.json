@@ -1,0 +1,10 @@
+{
+    "plan": {
+        "title": "Modificar plan",     
+        "form" : {
+        	"name" : "Nombre",
+        	"description" : "Descripcion",
+        	"cost" : "Costo"
+        }
+    }
+}

@@ -45,8 +45,12 @@ public class PlanServiceImpl implements PlanService {
 		return d;
 	}
 
-	public PlanEntity edit(PlanEntity d) throws Exception {		
-		planDao.merge(d);		
+	public PlanEntity edit(PlanEntity d) throws Exception {
+		PlanEntity p = planDao.findByName(d.getName());
+		if (p != null && p.getId() != d.getId())
+			throw new BusinessException("Ya existe un plan con ese nombre");
+		
+		planDao.merge(d);
 		return d;
 	}
 

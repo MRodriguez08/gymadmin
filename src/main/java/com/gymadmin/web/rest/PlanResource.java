@@ -3,7 +3,6 @@ package com.gymadmin.web.rest;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import com.gymadmin.persistence.entities.PlanEntity;
 import com.gymadmin.repository.BusinessException;
 import com.gymadmin.repository.JSonFactory;
@@ -40,22 +38,37 @@ public class PlanResource {
 		}		
 	}
 	
-	@RequestMapping(value="/{id}" , method = RequestMethod.GET)
-	public PlanEntity get(@PathVariable Integer id) {
-		PlanEntity plan = null;
+	@RequestMapping(value="/{id}" , method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> get(@PathVariable Integer id) {
 		try {
-			plan = planService.get(id);
-		} catch (Exception e) {
-			logger.error(getClass() , e);
+			PlanEntity plan = planService.get(id);
+			return new ResponseEntity<>(plan , HttpStatus.OK);
+		} catch (BusinessException ex) {
+			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
+		} catch (Exception ex) {
+			logger.error(getClass().getCanonicalName() , ex);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return plan;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> create(@RequestBody PlanEntity e) {
 		try {
 			PlanEntity p = planService.create(e);
-			return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(p , HttpStatus.OK);
+		} catch (BusinessException ex) {
+			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
+		} catch (Exception ex) {
+			logger.error(getClass().getCanonicalName() , ex);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> update(@RequestBody PlanEntity e) {
+		try {
+			PlanEntity p = planService.edit(e);
+			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
 		} catch (Exception ex) {

@@ -2,13 +2,20 @@
 	'use strict';
 
 	angular.module('gymAdminApp')
-    .controller('ListPlanController', ['$scope', '$log', 'PlanService', function ( $scope, $log, PlanService) {
+    .controller('ListPlanController', ['$scope', '$state', '$log', 'PlanService', function ( $scope, $state, $log, PlanService) {
     	
     	/**
     	 * Update action
     	 */
     	$scope.delete = function( ) {
             alert('updating plan...');
+        };
+        
+    	/**
+    	 * Update action
+    	 */
+    	$scope.go = function( rt , p1 ) {
+    		$state.go(rt , {id: p1});
         };
         
     	$scope.plansList = '';
@@ -20,8 +27,8 @@
 	          { displayName:'Nombre', field: 'name'},
 	          { displayName:'Descripcion', field: 'description' },
 	          { displayName:'Costo', field: 'cost', maxWidth : 80},
-	          { name: ' ', cellTemplate:'<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete()"></span>', maxWidth : 20 },  
-	          { name: '  ', cellTemplate:'<span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.delete()"></span>', maxWidth : 20  }
+	          { name: ' ', cellTemplate:'<span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'plan.update\',row.entity.id)"></span>', maxWidth : 20 },  
+	          { name: '  ', cellTemplate:'<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 20  }
 	        ],
 	        data: 'plansList',
         };
