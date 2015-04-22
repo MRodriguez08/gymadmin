@@ -18,7 +18,4 @@ import com.gymadmin.persistence.entities.CustomerEntity;
  */
 public interface CustomerDao extends Dao<Integer , CustomerEntity> {
 
-	public CustomerEntity findByName(String name);
-	
-	public List<CustomerEntity> findByFilters(Map<String , String> filters);
 }

@@ -1,11 +1,11 @@
 {
     "login": {
-        "title": "Authentication",
+        "title": "ingresar al sistema",
         "form": {
-            "password": "Password",
-            "password.placeholder": "Your password",
+            "password": "Contraseña",
+            "password.placeholder": "escribe tu contraseña aqui",
             "rememberme": "Automatic Login",
-            "button": "Authenticate"
+            "button": "Ingresar"
         },
         "messages": {
             "error": {

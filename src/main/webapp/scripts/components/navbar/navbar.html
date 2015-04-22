@@ -23,28 +23,53 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li ui-sref-active="active" >
-                        	<a ui-sref="listPlan">
+                        	<a ui-sref="plan.list">
                         		<span class="glyphicon glyphicon-wrench"></span>
                             	&#xA0;<span translate="global.menu.plans.list">Listar planes</span>
                           	</a>
                        	</li>
                        	<li ui-sref-active="active" >
-                        	<a ui-sref="createPlan">
+                        	<a ui-sref="plan.create">
                             	<span class="glyphicon glyphicon-wrench"></span>
                             	&#xA0;<span translate="global.menu.plans.create">Crear plan</span>
                           	</a>
                        	</li>
                     </ul>
                 </li>
+                <li ui-sref-active="active" ng-switch-when="true" class="dropdown pointer">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                        <span>
+                            <span class="glyphicon glyphicon-th-list"></span>
+                            <span class="hidden-tablet" translate="global.menu.customers.main">
+                                Plans
+                            </span>
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ui-sref-active="active" >
+                        	<a ui-sref="customer.list">
+                        		<span class="glyphicon glyphicon-wrench"></span>
+                            	&#xA0;<span translate="global.menu.customers.list">Listar clientes</span>
+                          	</a>
+                       	</li>
+                       	<li ui-sref-active="active" >
+                        	<a ui-sref="customer.create">
+                            	<span class="glyphicon glyphicon-wrench"></span>
+                            	&#xA0;<span translate="global.menu.customers.create">Crear cliente</span>
+                          	</a>
+                       	</li>
+                    </ul>
+                </li>
                 <li ng-class="{active: $state.includes('account')}" class="dropdown pointer">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                                <span>
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <span class="hidden-tablet" translate="global.menu.account.main">
-                                        Account
-                                    </span>
-                                    <b class="caret"></b>
-                                </span>
+	                    <span>
+	                        <span class="glyphicon glyphicon-user"></span>
+	                        <span class="hidden-tablet" translate="global.menu.account.main">
+	                            Account
+	                        </span>
+	                        <b class="caret"></b>
+	                    </span>
                     </a>
                     <ul class="dropdown-menu">
                         <li ui-sref-active="active" ng-switch-when="true"><a ui-sref="settings"><span class="glyphicon glyphicon-wrench"></span>
@@ -62,31 +87,6 @@
                             &#xA0;<span translate="global.menu.account.register">Register</span></a></li>
                     </ul>
                 </li>
-                <li ng-class="{active: $state.includes('admin')}"  ng-switch-when="true" ng-show="isInRole('ROLE_ADMIN')" class="dropdown pointer">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                                <span>
-                                    <span class="glyphicon glyphicon-tower"></span>
-                                    <span class="hidden-tablet" translate="global.menu.admin.main">Admin</span>
-                                    <b class="caret"></b>
-                                </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li ui-sref-active="active"><a ui-sref="metrics"><span class="glyphicon glyphicon-dashboard"></span>
-                            &#xA0;<span translate="global.menu.admin.metrics">Metrics</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="health"><span class="glyphicon glyphicon-heart"></span>
-                            &#xA0;<span translate="global.menu.admin.health">Health</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="configuration"><span class="glyphicon glyphicon-list-alt"></span>
-                            &#xA0;<span translate="global.menu.admin.configuration">Configuration</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="audits"><span class="glyphicon glyphicon-bell"></span>
-                            &#xA0;<span translate="global.menu.admin.audits">Audits</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="logs"><span class="glyphicon glyphicon-tasks"></span>
-                            &#xA0;<span translate="global.menu.admin.logs">Logs</span></a></li>
-                        <li ui-sref-active="active"><a ui-sref="docs"><span class="glyphicon glyphicon-book"></span>
-                            &#xA0;<span translate="global.menu.admin.apidocs">API Docs</span></a></li>
-                        <li ng-show="{{ENV === 'dev'}}"><a href='/console' target="_tab"><span class="glyphicon glyphicon-hdd"></span>
-                            &#xA0;<span translate="global.menu.admin.database">Database</span></a></li>
-                    </ul>
-                </li> 
             </ul>
         </div>
     </div>

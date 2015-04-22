@@ -1,0 +1,20 @@
+{
+    "customer": {
+        "title" : {
+        	"create" : "Crear nuevo cliente",
+        	"update" : "Modificar cliente",
+        	"list" : "Listado de clientes"
+    	},     
+        "form" : {
+        	"name" : "Nombre",
+        	"surname" : "Apellido",
+        	"cellphone" : "Telefono",
+        	"email" : "Email",
+        	"address" : "Direccion",
+        	"plan" : "Plan"
+        },
+        "placeholders" : {
+        	"select.plan" : "Selecciona el plan de cliente"
+        }
+    }
+}

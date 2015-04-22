@@ -4,22 +4,22 @@
   angular.module('gymAdminApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('plan.create', {
-                parent: 'plan',
-                url: '/createPlan',
+            .state('customer.update', {
+                parent: 'customer',
+                url: '/updateCustomer/:id',
                 data: {
                 	roles: ['ROLE_ADMIN'], 
-                    pageTitle: 'plan.title'
+                    pageTitle: 'customer.title.update'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/plan/create/create.html',
-                        controller: 'CreatePlanController'
+                        templateUrl: 'app/customer/update/update.html',
+                        controller: 'UpdateCustomerController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('plan');
+                        $translatePartialLoader.addPart('customer');
                         return $translate.refresh();
                     }]
                 }

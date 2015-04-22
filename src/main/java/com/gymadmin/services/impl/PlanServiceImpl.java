@@ -66,7 +66,14 @@ public class PlanServiceImpl implements PlanService {
 	}
 
 	public void delete(Integer id) throws Exception {
-
+		try {
+			PlanEntity entity = planDao.findById(id);
+			planDao.remove(entity);		
+		} catch (Exception e) {
+			logger.error(getClass().getCanonicalName() , e);
+			throw new BusinessException("Error al eliminar plan");
+		}
+		
 	}
 
 }

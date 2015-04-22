@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "customers")
 @NamedQueries( { 
@@ -54,20 +56,15 @@ public class CustomerEntity implements Serializable {
     private String address;
     
     @Column(name = "registration_date", nullable = false)
-    private Date registrationDate;
+    private Long registrationDate;
     
+    @JsonIgnore
     @OneToMany(mappedBy="customer", fetch=FetchType.LAZY)
     private List<PaymentEntity> payments;
 
     @ManyToOne
 	@JoinColumn(name = "plan_id", nullable = false)
 	private PlanEntity currentPlan;
-    
-    @ManyToOne
-	@JoinColumn(name = "payment_method_id", nullable = false)
-	private PaymentMethodEntity paymentMethod;
-    
-    private Boolean createFirstPayment;
 
 	public Integer getId() {
 		return id;
@@ -133,28 +130,12 @@ public class CustomerEntity implements Serializable {
 		this.currentPlan = currentPlan;
 	}
 
-	public Boolean getCreateFirstPayment() {
-		return createFirstPayment;
-	}
-
-	public void setCreateFirstPayment(Boolean createFirstPayment) {
-		this.createFirstPayment = createFirstPayment;
-	}
-
-	public Date getRegistrationDate() {
+	public Long getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(Long registrationDate) {
 		this.registrationDate = registrationDate;
-	}
-
-	public PaymentMethodEntity getPaymentMethod() {
-		return paymentMethod;
-	}
-
-	public void setPaymentMethod(PaymentMethodEntity paymentMethod) {
-		this.paymentMethod = paymentMethod;
 	}
 	
 }

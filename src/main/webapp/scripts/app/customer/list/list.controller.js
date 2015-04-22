@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('gymAdminApp')
-    .controller('ListPlanController', ['$scope', '$state', '$log', 'PlanService', function ( $scope, $state, $log, PlanService) {
+    .controller('ListCustomerController', ['$scope', '$state', '$log', 'CustomerService', function ( $scope, $state, $log, CustomerService) {
     	
     	/**
     	 * Update action
@@ -11,7 +11,7 @@
     		
     		bootbox.confirm("Are you sure?", function(result) {
     			if (result){
-    				PlanService.delete({id : id}).then(function (response) {
+    				CustomerService.delete({id : id}).then(function (response) {
     	    			bootbox.dialog({
     	    				  message: "Plan eliminado con exito",
     	    				  title: "Planes",
@@ -60,12 +60,12 @@
     		enableFiltering: true,
 	        enableSorting: true,
 	        columnDefs: [
-	          { displayName:'Id', field: 'id', maxWidth : 80 },
-	          { displayName:'Nombre', field: 'name'},
-	          { displayName:'Descripcion', field: 'description' },
-	          { displayName:'Costo', field: 'cost', maxWidth : 80},
-	          { name: ' ', enableFiltering: false, cellTemplate:'<span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'plan.update\',row.entity.id)"></span>', maxWidth : 20 },  
-	          { name: '  ', enableFiltering: false, cellTemplate:'<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 20  }
+	          { displayName:'Id', field: 'id', maxWidth : 20 },
+	          { displayName:'Nombre', field: 'name', minWidth : 80},
+	          { displayName:'Apellido', field: 'surname', minWidth : 80 },
+	          { displayName:'Plan', field: 'currentPlan.name', minWidth : 160},
+	          { name: ' ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'customer.update\',row.entity.id)"></span>', maxWidth : 5 },  
+	          { name: '  ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 5  }
 	        ],
 	        data: 'plansList',
         };
@@ -78,7 +78,7 @@
     	$scope.refresh = function () {        	
             $scope.updatingPlans = true;
             $scope.errorMessage = '';
-            PlanService.getAll({} , function (response) {
+            CustomerService.getAll({} , function (response) {
                 $scope.plansList = response;
                 $scope.updatingPlans = false;
             }, function (response) {

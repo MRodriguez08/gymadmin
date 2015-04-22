@@ -1,7 +1,7 @@
 <div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1 translate="plan.title">Registration</h1>
+            <h1 translate="plan.title.create">Create plan</h1>
 
 			<div ng-show="success">			
 	            <div class="alert alert-success"  >
@@ -38,7 +38,7 @@
 				
 
                 <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" translate="global.buttons.create">Register</button>
-                 <a ui-sref="listPlan">
+                 <a ui-sref="plan.list">
 	             	<span class="glyphicon glyphicon-wrench"></span>
 	             	&#xA0;<span translate="global.buttons.back">Back</span>
 	           	</a>

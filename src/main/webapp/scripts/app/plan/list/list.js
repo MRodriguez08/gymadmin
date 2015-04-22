@@ -3,12 +3,12 @@
 angular.module('gymAdminApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('listPlan', {
+            .state('plan.list', {
                 parent: 'plan',
                 url: '/listPlan',
                 data: {
                     roles: [], 
-                    pageTitle: 'plan.title'
+                    pageTitle: 'plan.title.list'
                 },
                 views: {
                     'content@': {
@@ -18,7 +18,7 @@ angular.module('gymAdminApp')
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('plan_list');
+                        $translatePartialLoader.addPart('plan');
                         return $translate.refresh();
                     }]
                 }

@@ -48,6 +48,17 @@
                         return cb(err);
                     }.bind(this)).$promise;
             },
+            delete: function (data, callback) {
+                var cb = callback || angular.noop;
+
+                return PlanResource.delete(data,
+                    function (response) {
+                        return cb(response);
+                    },
+                    function (err) {
+                        return cb(err);
+                    }.bind(this)).$promise;
+            },
         };
     }]);
   

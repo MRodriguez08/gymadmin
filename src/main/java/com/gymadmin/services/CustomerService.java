@@ -9,15 +9,13 @@ import com.gymadmin.persistence.entities.CustomerEntity;
  *
  * @author mrodriguez
  */
-public interface CustomerBusiness {
+public interface CustomerService {
     
     public List<CustomerEntity> findAll();
     
-    public List<CustomerEntity> findByFilters(Map<String , String> filters);
+    public CustomerEntity create(CustomerEntity e) throws Exception;
     
-    public void create(CustomerEntity e) throws Exception;
-    
-    public void edit(CustomerEntity e) throws Exception;
+    public CustomerEntity edit(CustomerEntity e) throws Exception;
     
     public CustomerEntity get(Integer Id) throws Exception;
     

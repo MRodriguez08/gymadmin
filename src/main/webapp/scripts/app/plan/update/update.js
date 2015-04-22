@@ -19,7 +19,7 @@
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('plan_update');
+                        $translatePartialLoader.addPart('plan');
                         return $translate.refresh();
                     }]
                 }

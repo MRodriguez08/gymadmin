@@ -1,0 +1,14 @@
+{
+    "plan": {
+        "title" : {
+        	"create" : "Crear nuevo plan",
+        	"update" : "Modificar plan",
+        	"list" : "Listado de planes"
+    	},     
+        "form" : {
+        	"name" : "Nombre",
+        	"description" : "Descripcion",
+        	"cost" : "Costo"
+        }
+    }
+}

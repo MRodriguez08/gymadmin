@@ -2,11 +2,11 @@
     "global": {
         "title": "GymAdmin",
         "buttons": {
-        	"edit" : "Editar",
-        	"refresh" : "Refrescar",
-        	"delete" : "Eliminar",
-        	"create" : "Crear",
-        	"back" : "Volver"
+            "edit": "Editar",
+            "refresh": "Refrescar",
+            "delete": "Eliminar",
+            "create": "Crear",
+            "back": "Volver"
         },
         "menu": {
             "home": "Home",
@@ -14,21 +14,30 @@
                 "main": "Planes",
                 "list": "Listado de planes",
                 "create": "Crear plan",
-                "attributes" : {
-                	"id": "id",
-                	"name" : "Nombre",
-                	"description" : "Descripcion",
-                	"cost" : "Costo"
+                "attributes": {
+                    "id": "id",
+                    "name": "Nombre",
+                    "description": "Descripcion",
+                    "cost": "Costo"
+                }
+            },
+            "customers": {
+                "main": "Clientes",
+                "list": "Listado de clientes",
+                "create": "Crear cliente",
+                "attributes": {
+                    "id": "id",
+                    "name": "Nombre",
+                    "surname": "Apellido",
+                    "email": "Email",
+                    "cellphone": "Telefono",
+                    "address": "Direccion"
                 }
             },
             "account": {
                 "main": "Cuenta",
-                "settings": "Settings",
-                "password": "Password",
-                "sessions": "Sessions",
-                "login": "Authenticate",
-                "logout": "Log out",
-                "register": "Register"
+                "login": "Ingresar",
+                "logout": "Salir"
             },
             "admin": {
                 "main": "Administration",
@@ -44,14 +53,14 @@
             "language": "Language"
         },
         "form": {
-            "username": "Login",
-            "username.placeholder": "Your login",
+            "username": "Usuario",
+            "username.placeholder": "escribe aqui tu usuario",
             "newpassword": "New password",
-            "newpassword.placeholder": "New password",
-            "confirmpassword": "New password confirmation",
-            "confirmpassword.placeholder": "Confirm the new password",
+            "newpassword.placeholder": "escribe aqui tu nueva contraseña",
+            "confirmpassword": "Confirmacion de nueva contraseña",
+            "confirmpassword.placeholder": "confirma aqui tu nueva contraseña",
             "email": "E-mail",
-            "email.placeholder": "Your e-mail"
+            "email.placeholder": "tu e-mail"
         },
         "messages": {
             "info": {
@@ -59,7 +68,7 @@
                 "register": "You don't have an account yet? <a href=\"#/register\">Register a new account</a>"
             },
             "error": {
-                "dontmatch" : "The password and its confirmation do not match!"
+                "dontmatch": "The password and its confirmation do not match!"
             },
             "validate": {
                 "newpassword": {
@@ -80,33 +89,6 @@
                     "maxlength": "Your e-mail cannot be longer than 50 characters."
                 }
             }
-        }
-    },
-    "entity": {
-        "action": {
-            "back": "Back",
-            "cancel": "Cancel",
-            "delete": "Delete",
-            "edit": "Edit",
-            "save": "Save",
-            "view": "View"
-        },
-        "detail": {
-            "field": "Field",
-            "value": "Value"
-        },
-        "delete": {
-            "title": "Confirm delete operation"
-        },
-        "validation": {
-            "required": "This field is required.",
-            "minlength": "This field is required to be at least {{min}} characters.",
-            "maxlength": "This field cannot be longer than {{max}} characters.",
-            "min": "This field should be more than {{min}}.",
-            "max": "This field cannot be more than {{max}}.",
-            "pattern": "This field should follow pattern {{pattern}}.",
-            "number": "This field should be a number.",
-            "datetimelocal": "This field should be a date and time."
         }
     },
     "footer": "This is your footer"

@@ -13,25 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gymadmin.persistence.entities.PlanEntity;
+import com.gymadmin.persistence.entities.CustomerEntity;
 import com.gymadmin.repository.BusinessException;
 import com.gymadmin.repository.JSonFactory;
-import com.gymadmin.services.PlanService;
+import com.gymadmin.services.CustomerService;
 
 @RestController
-@RequestMapping("/api/plan")
-public class PlanResource {
+@RequestMapping("/api/customer")
+public class CustomerResource {
 	
-	private static final Logger logger = Logger.getLogger(PlanResource.class);
+	private static final Logger logger = Logger.getLogger(CustomerResource.class);
 
 	@Autowired
-	private PlanService planService;	
+	private CustomerService customerService;	
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<PlanEntity>> getAll() {
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getAll() {
 		try {
-			List<PlanEntity> plansList = planService.findAll();
-			return new ResponseEntity<>( plansList, HttpStatus.OK);
+			List<CustomerEntity> list = customerService.findAll();
+			return new ResponseEntity<>( list, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(getClass().getCanonicalName() , e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -41,7 +41,7 @@ public class PlanResource {
 	@RequestMapping(value="/{id}" , method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> get(@PathVariable Integer id) {
 		try {
-			PlanEntity plan = planService.get(id);
+			CustomerEntity plan = customerService.get(id);
 			return new ResponseEntity<>(plan , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
@@ -54,7 +54,7 @@ public class PlanResource {
 	@RequestMapping(value="/{id}" , method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		try {
-			planService.delete(id);
+			customerService.delete(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
@@ -65,9 +65,9 @@ public class PlanResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> create(@RequestBody PlanEntity e) {
+	public ResponseEntity<?> create(@RequestBody CustomerEntity e) {
 		try {
-			PlanEntity p = planService.create(e);
+			CustomerEntity p = customerService.create(e);
 			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
@@ -78,9 +78,9 @@ public class PlanResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> update(@RequestBody PlanEntity e) {
+	public ResponseEntity<?> update(@RequestBody CustomerEntity e) {
 		try {
-			PlanEntity p = planService.edit(e);
+			CustomerEntity p = customerService.edit(e);
 			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
