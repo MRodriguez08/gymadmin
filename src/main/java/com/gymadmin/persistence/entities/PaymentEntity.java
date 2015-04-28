@@ -50,8 +50,8 @@ public class PaymentEntity implements Serializable {
     private Date paymentDueDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "payment_method_id", nullable = false)
-	private PaymentMethodEntity paymentMethod;
+	@JoinColumn(name = "payment_plan_id", nullable = false)
+	private PaymentPlanEntity paymentPlan;
 
 	public Integer getId() {
 		return id;
@@ -109,12 +109,12 @@ public class PaymentEntity implements Serializable {
 		this.plan = plan;
 	}
 
-	public PaymentMethodEntity getPaymentMethod() {
-		return paymentMethod;
+	public PaymentPlanEntity getPaymentPlan() {
+		return paymentPlan;
 	}
 
-	public void setPaymentMethod(PaymentMethodEntity paymentMethod) {
-		this.paymentMethod = paymentMethod;
+	public void setPaymentPlan(PaymentPlanEntity paymentMethod) {
+		this.paymentPlan = paymentMethod;
 	}
     
 }

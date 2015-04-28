@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gymadmin.persistence.entities.PlanEntity;
+import com.gymadmin.persistence.entities.PaymentEntity;
 import com.gymadmin.repository.BusinessException;
 import com.gymadmin.repository.JSonFactory;
-import com.gymadmin.services.PlanService;
+import com.gymadmin.services.PaymentService;
 
 @RestController
-@RequestMapping(value = "/api/plan", produces = MediaType.APPLICATION_JSON_VALUE)
-public class PlanResource {
+@RequestMapping(value = "/api/payment", produces = MediaType.APPLICATION_JSON_VALUE)
+public class PaymentResource {
 	
-	private static final Logger logger = Logger.getLogger(PlanResource.class);
+	private static final Logger logger = Logger.getLogger(PaymentResource.class);
 
 	@Autowired
-	private PlanService planService;	
+	private PaymentService paymentService;	
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<PlanEntity>> getAll() {
+	public ResponseEntity<?> getAll() {
 		try {
-			List<PlanEntity> plansList = planService.findAll();
+			List<PaymentEntity> plansList = paymentService.findAll();
 			return new ResponseEntity<>( plansList, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(getClass().getCanonicalName() , e);
@@ -41,7 +41,7 @@ public class PlanResource {
 	@RequestMapping(value="/{id}" , method = RequestMethod.GET)
 	public ResponseEntity<?> get(@PathVariable Integer id) {
 		try {
-			PlanEntity plan = planService.get(id);
+			PaymentEntity plan = paymentService.get(id);
 			return new ResponseEntity<>(plan , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
@@ -54,7 +54,7 @@ public class PlanResource {
 	@RequestMapping(value="/{id}" , method = RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable Integer id) {
 		try {
-			planService.delete(id);
+			paymentService.delete(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
@@ -65,9 +65,9 @@ public class PlanResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> create(@RequestBody PlanEntity e) {
+	public ResponseEntity<?> create(@RequestBody PaymentEntity e) {
 		try {
-			PlanEntity p = planService.create(e);
+			PaymentEntity p = paymentService.create(e);
 			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
@@ -78,9 +78,9 @@ public class PlanResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<?> update(@RequestBody PlanEntity e) {
+	public ResponseEntity<?> update(@RequestBody PaymentEntity e) {
 		try {
-			PlanEntity p = planService.edit(e);
+			PaymentEntity p = paymentService.edit(e);
 			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);

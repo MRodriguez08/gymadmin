@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gymadmin.persistence.PersistenceFactory;
 import com.gymadmin.persistence.dao.CustomerDao;
 import com.gymadmin.persistence.dao.PaymentDao;
 import com.gymadmin.persistence.dao.PaymentStateDao;
@@ -37,7 +36,6 @@ public class CustomerServiceImpl implements CustomerService {
     //private PaymentStateDao paymmentStateDao = null;
     
     public CustomerServiceImpl(){
-    	customerDao = PersistenceFactory.getCustomerDao();
     	//paymmentDao = PersistenceFactory.getPaymentDao();
     	//paymmentStateDao = PersistenceFactory.getPaymentStateDao();
     }

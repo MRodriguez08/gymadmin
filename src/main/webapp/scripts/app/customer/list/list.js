@@ -7,7 +7,7 @@ angular.module('gymAdminApp')
                 parent: 'customer',
                 url: '/listCustomer',
                 data: {
-                    roles: [], 
+                	roles: [ 'ROLE_ADMIN' , 'ROLE_USER'],
                     pageTitle: 'customer.title.list'
                 },
                 views: {

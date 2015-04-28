@@ -39,18 +39,18 @@
 				</div>		
 				
 				<div class="form-group">
-				    <label  class="control-label" translate="customer.form.cellphone" for="cellphone">Cellphone</label>
+				    <label class="control-label" translate="customer.form.cellphone" for="cellphone">Cellphone</label>
 				    <input name="cellphone" ng-model="model.cellphone" type="text" class="form-control" id="cellphone" >
 				</div>		
 				
 				<div class="form-group">
-				    <label translate="customer.form.address" for="address">Address</label>
+				    <label class="control-label"  translate="customer.form.address" for="address">Address</label>
 				    <textarea name="address" ng-model="model.address" id="address" class="form-control" rows="3"></textarea>
 				</div>	
 				
-				<div class="form-group" ng-class="{'has-error' : form.plan.$dirty && form.plan.$error.required}">
-				    <label translate="customer.form.plan" for="plan">Plan</label>
-				    <select id="plan" name="plan" class="form-control" ng-model="currentPlan" ng-options="item as item.name for item in plansList">
+				<div class="form-group" ng-class="{'has-error' : form.currentPlan.$dirty && form.currentPlan.$error.required}">
+				    <label class="control-label" translate="customer.form.plan" for="currentPlan">Plan</label>
+				    <select required id="currentPlan" name="currentPlan" class="form-control" ng-model="currentPlan" ng-options="item as item.name for item in plansList">
 				    <option translate="customer.placeholders.select.plan" value="">Select the customer plan</option>
 					</select>
 				</div>			

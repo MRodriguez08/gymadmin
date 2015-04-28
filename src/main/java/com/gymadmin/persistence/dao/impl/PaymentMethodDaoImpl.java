@@ -11,27 +11,30 @@ import java.util.Map;
 
 import javax.persistence.Query;
 
-import com.gymadmin.persistence.dao.PaymentMethodDao;
-import com.gymadmin.persistence.entities.PaymentMethodEntity;
+import org.springframework.stereotype.Component;
+
+import com.gymadmin.persistence.dao.PaymentPlanDao;
+import com.gymadmin.persistence.entities.PaymentPlanEntity;
 
 /**
  *
  * @author mrodriguez
  */
-public class PaymentMethodDaoImpl extends DaoImpl<Integer , PaymentMethodEntity> implements PaymentMethodDao {
+@Component("paymentMethodDao")
+public class PaymentMethodDaoImpl extends DaoImpl<Integer , PaymentPlanEntity> implements PaymentPlanDao {
     
-	public PaymentMethodEntity findByName(String name) {
+	public PaymentPlanEntity findByName(String name) {
 		Query namedQuery = em.createNamedQuery("PaymentMethodEntity.findByName");
 		namedQuery.setParameter("name", name);
-		return (PaymentMethodEntity)namedQuery.getSingleResult();		
+		return (PaymentPlanEntity)namedQuery.getSingleResult();		
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<PaymentMethodEntity> findByFilters(Map<String, String> filters) {		
+	public List<PaymentPlanEntity> findByFilters(Map<String, String> filters) {		
 		Query namedQuery = em.createNamedQuery("PaymentMethodEntity.findByFilters");
 		namedQuery.setParameter("name", "%" + filters.get("name").toUpperCase() + "%");
 		namedQuery.setParameter("description", "%" + filters.get("description").toUpperCase() + "%");
-		return (List<PaymentMethodEntity>)namedQuery.getResultList();
+		return (List<PaymentPlanEntity>)namedQuery.getResultList();
 	}
 	
 }

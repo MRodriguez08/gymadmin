@@ -8,7 +8,7 @@
                 parent: 'customer',
                 url: '/updateCustomer/:id',
                 data: {
-                	roles: ['ROLE_ADMIN'], 
+                	roles: [ 'ROLE_ADMIN' , 'ROLE_USER'],
                     pageTitle: 'customer.title.update'
                 },
                 views: {

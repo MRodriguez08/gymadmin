@@ -9,17 +9,17 @@ package com.gymadmin.persistence.dao;
 import java.util.List;
 import java.util.Map;
 
-import com.gymadmin.persistence.entities.PaymentMethodEntity;
+import com.gymadmin.persistence.entities.PaymentPlanEntity;
 
 
 /**
  *
  * @author mrodriguez
  */
-public interface PaymentMethodDao extends Dao<Integer , PaymentMethodEntity> {
+public interface PaymentPlanDao extends Dao<Integer , PaymentPlanEntity> {
     
-	public PaymentMethodEntity findByName(String name);
+	public PaymentPlanEntity findByName(String name);
 	
-	public List<PaymentMethodEntity> findByFilters(Map<String , String> filters);
+	public List<PaymentPlanEntity> findByFilters(Map<String , String> filters);
 	
 }

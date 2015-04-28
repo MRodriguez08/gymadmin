@@ -49,8 +49,8 @@
 				</div>	
 				
 				<div class="form-group" ng-class="{'has-error' : form.plan.$dirty && form.plan.$error.required}">
-				    <label translate="customer.form.plan" for="plan">Plan</label>
-				    <select id="plan" name="plan" class="form-control" ng-model="model.currentPlan" ng-options="item as item.name for item in plansList">
+				    <label class="control-label" translate="customer.form.plan" for="plan">Plan</label>
+				    <select required id="plan" name="plan" class="form-control" ng-model="model.currentPlan" ng-options="item as item.name for item in plansList">
 				    <option translate="customer.placeholders.select.plan" value="">Select the customer plan</option>
 					</select>
 				</div>			

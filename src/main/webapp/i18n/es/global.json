@@ -34,6 +34,19 @@
                     "address": "Direccion"
                 }
             },
+            "payments": {
+                "main": "Pagos",
+                "list": "Listado de pagos",
+                "create": "Crear pago",
+                "attributes": {
+                    "id": "id",
+                    "name": "Nombre",
+                    "surname": "Apellido",
+                    "email": "Email",
+                    "cellphone": "Telefono",
+                    "address": "Direccion"
+                }
+            },
             "account": {
                 "main": "Cuenta",
                 "login": "Ingresar",

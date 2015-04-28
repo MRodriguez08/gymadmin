@@ -3,22 +3,22 @@
 angular.module('gymAdminApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('plan.list', {
-                parent: 'plan',
-                url: '/listPlan',
+            .state('payment.list', {
+                parent: 'payment',
+                url: '/listPayment',
                 data: {
                     roles: [ 'ROLE_ADMIN' , 'ROLE_USER'], 
-                    pageTitle: 'plan.title.list'
+                    pageTitle: 'payment.title.list'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/plan/list/list.html',
-                        controller: 'ListPlanController'
+                        templateUrl: 'app/payment/list/list.html',
+                        controller: 'ListPaymentController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('plan');
+                        $translatePartialLoader.addPart('payment');
                         return $translate.refresh();
                     }]
                 }

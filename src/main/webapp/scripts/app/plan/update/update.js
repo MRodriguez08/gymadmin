@@ -8,7 +8,7 @@
                 parent: 'plan',
                 url: '/updatePlan/:id',
                 data: {
-                	roles: ['ROLE_ADMIN'], 
+                	roles: [ 'ROLE_ADMIN' , 'ROLE_USER'],
                     pageTitle: 'plan.title'
                 },
                 views: {

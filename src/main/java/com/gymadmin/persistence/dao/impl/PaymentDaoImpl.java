@@ -6,6 +6,8 @@
 
 package com.gymadmin.persistence.dao.impl;
 
+import org.springframework.stereotype.Component;
+
 import com.gymadmin.persistence.dao.PaymentDao;
 import com.gymadmin.persistence.entities.PaymentEntity;
 
@@ -13,6 +15,7 @@ import com.gymadmin.persistence.entities.PaymentEntity;
  *
  * @author mrodriguez
  */
+@Component("paymentDao")
 public class PaymentDaoImpl extends DaoImpl<Integer , PaymentEntity> implements PaymentDao {
     
 }

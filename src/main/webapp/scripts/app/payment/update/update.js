@@ -1,19 +1,20 @@
-'use strict';
+(function(){
+  'use strict';
 
-angular.module('gymAdminApp')
+  angular.module('gymAdminApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('plan.list', {
+            .state('payment.update', {
                 parent: 'plan',
-                url: '/listPlan',
+                url: '/updatePayment/:id',
                 data: {
-                    roles: [ 'ROLE_ADMIN' , 'ROLE_USER'], 
-                    pageTitle: 'plan.title.list'
+                	roles: [ 'ROLE_ADMIN' , 'ROLE_USER'],
+                    pageTitle: 'plan.title'
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/plan/list/list.html',
-                        controller: 'ListPlanController'
+                        templateUrl: 'app/plan/update/update.html',
+                        controller: 'UpdatePlanController'
                     }
                 },
                 resolve: {
@@ -24,3 +25,5 @@ angular.module('gymAdminApp')
                 }
             });
     });
+
+})();

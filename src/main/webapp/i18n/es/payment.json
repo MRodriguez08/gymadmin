@@ -1,0 +1,34 @@
+{
+    "payment": {
+        "title" : {
+        	"create" : "Crear nuevo pago",
+        	"update" : "Modificar pago",
+        	"list" : "Listado de pagos"
+    	},     
+        "grid" : {
+			"id" : "Id",
+			"validCost" : "Costo efectivo"
+        },
+        "form" : {
+        	"customer" : "Cliente",
+        	"validCost" : "Costo actual",
+        	"plan" : "Plan",
+        	"planCost" : "Costo del plan",
+        	"paymentPlan" : "Plan de pago"
+        },
+        "placeholders" : {
+        	"select.customer" : "Seleccione el cliente",
+        	"select.paymentPlan" : "Seleccione el plan de pago"
+    	},
+    	"messages" : {
+    		"error" : {
+    			"retrieveCustomers" : "Error recuperando clientes",
+    			"retrievePaymentPlans" : "Error recuperando planes de pago"
+    		},
+    		"success" : {
+    			"create" : "Pago ingresado con exito",
+    			"retrievePaymentPlan" : "Error recuperando planes de pago"
+    		}
+    	}
+	}
+}

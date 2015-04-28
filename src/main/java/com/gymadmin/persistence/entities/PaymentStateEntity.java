@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "payment_states")
 public class PaymentStateEntity implements Serializable {
@@ -34,6 +36,7 @@ public class PaymentStateEntity implements Serializable {
     @Column(name = "description")
     private String description;
     
+    @JsonIgnore
     @OneToMany(mappedBy="state", fetch=FetchType.LAZY)
     private List<PaymentEntity> payments;
 

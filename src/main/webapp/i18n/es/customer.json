@@ -13,6 +13,15 @@
         	"address" : "Direccion",
         	"plan" : "Plan"
         },
+        "grid" : {
+        	"id" : "Id",
+        	"name" : "Nombre",
+        	"surname" : "Apellido",
+        	"cellphone" : "Telefono",
+        	"email" : "Email",
+        	"address" : "Direccion",
+        	"currentPlan.name" : "Plan"
+        },
         "placeholders" : {
         	"select.plan" : "Selecciona el plan de cliente"
         }

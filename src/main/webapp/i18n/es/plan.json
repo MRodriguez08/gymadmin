@@ -9,6 +9,12 @@
         	"name" : "Nombre",
         	"description" : "Descripcion",
         	"cost" : "Costo"
+        },
+        "grid" : {
+        	"id" : "Id",
+        	"name" : "Nombre",
+        	"description" : "Descripcion",
+        	"cost" : "Costo"
         }
     }
 }

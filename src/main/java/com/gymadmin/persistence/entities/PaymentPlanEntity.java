@@ -13,16 +13,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "payment_methods")
+@Table(name = "payment_plans")
 @NamedQueries( { 
-	@NamedQuery(name = "PaymentMethodEntity.findByName", 
-			query = "SELECT e FROM PaymentMethodEntity e " +
+	@NamedQuery(name = "PaymentPlanEntity.findByName", 
+			query = "SELECT e FROM PaymentPlanEntity e " +
 					"WHERE e.name = :name"),
-	@NamedQuery(name = "PaymentMethodEntity.findByFilters", 
-			query = "SELECT e FROM PaymentMethodEntity e " +
+	@NamedQuery(name = "PaymentPlanEntity.findByFilters", 
+			query = "SELECT e FROM PaymentPlanEntity e " +
 					"WHERE upper(e.name) LIKE :name AND upper(e.description) LIKE :description")
 })
-public class PaymentMethodEntity implements Serializable {
+public class PaymentPlanEntity implements Serializable {
     
     /**
 	 * 

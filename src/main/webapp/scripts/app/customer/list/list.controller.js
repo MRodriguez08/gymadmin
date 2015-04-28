@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('gymAdminApp')
-    .controller('ListCustomerController', ['$scope', '$state', '$log', 'CustomerService', function ( $scope, $state, $log, CustomerService) {
+    .controller('ListCustomerController', ['$scope', '$state', '$log', '$translate', 'CustomerService', function ( $scope, $state, $log, $translate, CustomerService) {
     	
     	/**
     	 * Update action
@@ -60,12 +60,12 @@
     		enableFiltering: true,
 	        enableSorting: true,
 	        columnDefs: [
-	          { displayName:'Id', field: 'id', maxWidth : 20 },
-	          { displayName:'Nombre', field: 'name', minWidth : 80},
-	          { displayName:'Apellido', field: 'surname', minWidth : 80 },
-	          { displayName:'Plan', field: 'currentPlan.name', minWidth : 160},
-	          { name: ' ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'customer.update\',row.entity.id)"></span>', maxWidth : 5 },  
-	          { name: '  ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 5  }
+	          { displayName: $translate.instant('customer.grid.id'), field: 'id', maxWidth : 20 },
+	          { displayName: $translate.instant('customer.grid.name'), field: 'name', minWidth : 80},
+	          { displayName: $translate.instant('customer.grid.surname'), field: 'surname', minWidth : 80 },
+	          { displayName: $translate.instant('customer.grid.currentPlan.name'), field: 'currentPlan.name', minWidth : 160},
+	          { name: ' ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span class="grid-action-glyphicon glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'customer.update\',row.entity.id)"></span>', maxWidth : 5 },  
+	          { name: '  ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span class="grid-action-glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 5  }
 	        ],
 	        data: 'plansList',
         };

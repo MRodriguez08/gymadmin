@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('gymAdminApp')
-    .controller('ListPlanController', ['$scope', '$state', '$log', '$translate', 'PlanService', function ( $scope, $state, $log, $translate, PlanService) {
+    .controller('ListPaymentController', ['$scope', '$state', '$log', '$translate', 'PaymentService', function ( $scope, $state, $log, $translate, PaymentService) {
     	
     	/**
     	 * Update action
@@ -11,10 +11,10 @@
     		
     		bootbox.confirm("Are you sure?", function(result) {
     			if (result){
-    				PlanService.delete({id : id}).then(function (response) {
+    				PaymentService.delete({id : id}).then(function (response) {
     	    			bootbox.dialog({
-    	    				  message: "Plan eliminado con exito",
-    	    				  title: "Planes",
+    	    				  message: "Pago eliminado con exito",
+    	    				  title: "Pagos",
     	    				  buttons: {
     	    				    success: {
     	    				      label: "Aceptar",
@@ -60,10 +60,8 @@
     		enableFiltering: true,
 	        enableSorting: true,
 	        columnDefs: [
-	          { displayName: $translate.instant('plan.grid.id'), field: 'id', maxWidth : 80 },
-	          { displayName: $translate.instant('plan.grid.name') , field: 'name'},
-	          { displayName: $translate.instant('plan.grid.description'), field: 'description' },
-	          { displayName: $translate.instant('plan.grid.cost'), field: 'cost', maxWidth : 80},
+	          { displayName: $translate.instant('payment.grid.id'), field: 'id', maxWidth : 80 },
+	          { displayName: $translate.instant('payment.grid.validCost') , field: 'validCost'}, 
 	          { name: ' ', enableFiltering: false, cellTemplate:'<span class="grid-action-glyphicon glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'plan.update\',row.entity.id)"></span>', maxWidth : 20 },  
 	          { name: '  ', enableFiltering: false, cellTemplate:'<span class=" grid-action-glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 20  }
 	        ],
@@ -78,7 +76,7 @@
     	$scope.refresh = function () {        	
             $scope.updatingPlans = true;
             $scope.errorMessage = '';
-            PlanService.getAll({} , function (response) {
+            PaymentService.getAll({} , function (response) {
                 $scope.plansList = response;
                 $scope.updatingPlans = false;
             }, function (response) {
@@ -90,6 +88,6 @@
             	}                
             });
         };
-        $scope.refresh();        
+        $scope.refresh();    
     }]);
 })() ;

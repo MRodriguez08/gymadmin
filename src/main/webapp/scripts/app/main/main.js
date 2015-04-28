@@ -7,7 +7,7 @@ angular.module('gymAdminApp')
                 parent: 'site',
                 url: '/',
                 data: {
-                    roles: []
+                    
                 },
                 views: {
                     'content@': {
