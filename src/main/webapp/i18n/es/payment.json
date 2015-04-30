@@ -30,7 +30,11 @@
     		},
     		"success" : {
     			"create" : "Pago ingresado con exito",
+    			"delete" : "Pago cancelado con exito",
     			"retrievePaymentPlan" : "Error recuperando planes de pago"
+    		},
+    		"confirmation": {
+    			"deletion": "Estar seguro que quieres cancelar este pago?"
     		}
     	}
 	}

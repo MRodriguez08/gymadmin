@@ -44,7 +44,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 	public PaymentEntity create(PaymentEntity d) throws Exception {
 		
-		d.setPaymentDate(new Date()); 
+		d.setPaymentGenerationDate(new Date()); 
 		d.setPaymentDueDate(DateTimeUtil.addDays(new Date(), d.getPaymentPlan().getMonthsCount()));
 		d.setState(paymentStateDao.findById(1));
 		
@@ -67,7 +67,8 @@ public class PaymentServiceImpl implements PaymentService {
 	public void delete(Integer id) throws Exception {
 		try {
 			PaymentEntity entity = paymentDao.findById(id);
-			paymentDao.remove(entity);		
+			entity.setCanceled(true);
+			paymentDao.merge(entity);		
 		} catch (Exception e) {
 			logger.error(getClass().getCanonicalName() , e);
 			throw new BusinessException("Error al eliminar plan");

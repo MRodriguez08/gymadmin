@@ -9,11 +9,11 @@
     	 */
     	$scope.delete = function( id ) {
     		
-    		bootbox.confirm("Are you sure?", function(result) {
+    		bootbox.confirm($translate.instant('payment.messages.confirmation.deletion'), function(result) {
     			if (result){
     				PaymentService.delete({id : id}).then(function (response) {
     	    			bootbox.dialog({
-    	    				  message: "Pago eliminado con exito",
+    	    				  message: $translate.instant('payment.messages.success.delete'),
     	    				  title: "Pagos",
     	    				  buttons: {
     	    				    success: {

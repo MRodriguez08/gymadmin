@@ -46,6 +46,9 @@ public class PaymentEntity implements Serializable {
 	@Column(name = "payment_date", nullable = true)
     private Date paymentDate;
 	
+	@Column(name = "payment_generation_date", nullable = false)
+    private Date paymentGenerationDate;
+	
 	@Column(name = "payment_due_date", nullable = false)
     private Date paymentDueDate;
 	
@@ -53,6 +56,9 @@ public class PaymentEntity implements Serializable {
 	@JoinColumn(name = "payment_plan_id", nullable = false)
 	private PaymentPlanEntity paymentPlan;
 
+	@Column(name = "is_canceled", nullable = true)
+    private Boolean canceled;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -116,5 +122,22 @@ public class PaymentEntity implements Serializable {
 	public void setPaymentPlan(PaymentPlanEntity paymentMethod) {
 		this.paymentPlan = paymentMethod;
 	}
+
+	public Boolean getCanceled() {
+		return canceled;
+	}
+
+	public void setCanceled(Boolean canceled) {
+		this.canceled = canceled;
+	}
+
+	public Date getPaymentGenerationDate() {
+		return paymentGenerationDate;
+	}
+
+	public void setPaymentGenerationDate(Date paymentGenerationDate) {
+		this.paymentGenerationDate = paymentGenerationDate;
+	}
+	
     
 }
