@@ -6,3 +6,4 @@ target/
 .project
 node_modules/
 bower_components/
+src/main/webapp/assets/images/customers/

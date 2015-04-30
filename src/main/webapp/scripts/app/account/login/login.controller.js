@@ -14,11 +14,7 @@ angular.module('gymAdminApp')
                 rememberMe: $scope.rememberMe
             }).then(function () {
                 $scope.authenticationError = false;
-                if ($rootScope.previousStateName === 'register') {
-                    $state.go('home');
-                } else {
-                    $rootScope.back();
-                }
+                $state.go('payment.list');
             }).catch(function () {
                 $scope.authenticationError = true;
             });

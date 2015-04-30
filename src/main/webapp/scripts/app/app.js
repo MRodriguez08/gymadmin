@@ -3,7 +3,7 @@
 	'use strict';
 
 	angular.module('gymAdminApp', ['LocalStorageModule', 'tmh.dynamicLocale',
-    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ui.grid'])
+    'ngResource', 'ui.router', 'ngCookies', 'pascalprecht.translate', 'ui.grid', 'ngFileUpload'])
 
     .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, VERSION) {
         $rootScope.ENV = ENV;
@@ -40,8 +40,8 @@
 
         $rootScope.back = function() {
             // If previous state is 'activate' or do not exist go to 'home'
-            if ($rootScope.previousStateName === 'activate' || $state.get($rootScope.previousStateName) === null) {
-                $state.go('home');
+            if ($state.get($rootScope.previousStateName) === null) {
+                $state.go('payment.list');
             } else {
                 $state.go($rootScope.previousStateName, $rootScope.previousStateParams);
             }

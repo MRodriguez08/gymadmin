@@ -1,14 +1,18 @@
 package com.gymadmin.services.impl;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gymadmin.config.Constants;
 import com.gymadmin.persistence.dao.CustomerDao;
 import com.gymadmin.persistence.dao.PaymentDao;
 import com.gymadmin.persistence.dao.PaymentStateDao;
@@ -30,14 +34,12 @@ public class CustomerServiceImpl implements CustomerService {
     
 	@Autowired
     private CustomerDao customerDao;
-    
-    
-    //private PaymentDao paymmentDao = null;
-    //private PaymentStateDao paymmentStateDao = null;
+	
+	@Autowired
+	private ServletContext servletContext;
     
     public CustomerServiceImpl(){
-    	//paymmentDao = PersistenceFactory.getPaymentDao();
-    	//paymmentStateDao = PersistenceFactory.getPaymentStateDao();
+
     }
     
     public List<CustomerEntity> findAll(){
@@ -52,7 +54,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
     
 
-    public CustomerEntity edit(CustomerEntity d) throws Exception { 		
+    public CustomerEntity edit(CustomerEntity d) throws Exception { 
+   	
+		CustomerEntity check = customerDao.findById(d.getId());
+		if ( d.getImage() != null && !d.getImage().equals(check.getImage()) ) {
+			d.setImage(updateAvatar(check.getImage() , d.getImage()));
+		}
+    	
 		customerDao.merge(d);
 		return d;
     }
@@ -73,6 +81,25 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new BusinessException("Error al eliminar cliente");
 		}
       
+    }
+    
+    private String updateAvatar(String oldFile, String newfile) throws Exception{
+    	
+    	String imagesPath = servletContext.getRealPath(Constants.CUSTOMERS_IMAGE_PATH);
+    	String oldImage = imagesPath + "/" + oldFile;
+		File file = new File(oldImage);				 
+		if(file.delete())
+			logger.error("Image " + oldImage + " couldn't be deleted");
+		
+		File oldf =new File(imagesPath + "/" + newfile);
+		File newf =new File(imagesPath + "/linked_" + newfile);
+ 
+		if(oldf.renameTo(newf)){
+			logger.info("Rename succesful");
+			return newf.getName();
+		} else {
+			throw new Exception("Rename failed");
+		}    		
     }
     
 }

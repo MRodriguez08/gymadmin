@@ -2,12 +2,23 @@
   'use strict';
 
   angular.module('gymAdminApp')
-    .factory('CustomerService', ['$rootScope', '$http', 'CustomerResource', function ($rootScope, $http, CustomerResource) {
+    .factory('CustomerService', ['$rootScope', '$http', 'Upload', 'CustomerResource', 'PendingImageResource', function ($rootScope, $http, Upload, CustomerResource, PendingImageResource) {
         return {
             getAll: function (data, callback) {
                 var cb = callback || angular.noop;
 
                 return CustomerResource.query(data,
+                    function (response) {
+                        return cb(response);
+                    },
+                    function (err) {
+                        return cb(err);
+                    }.bind(this)).$promise;
+            },
+            getPendingImage: function (data, callback) {
+                var cb = callback || angular.noop;
+
+                return PendingImageResource.get(data,
                     function (response) {
                         return cb(response);
                     },
@@ -25,6 +36,16 @@
                     function (err) {
                         return cb(err);
                     }.bind(this)).$promise;
+            },
+            uploadImage: function (img, onProgress, onSuccess) {
+
+                return Upload.upload({
+    	            url: 'imageupload',
+    	            data: {}, // additional data to send
+    	            file: img,
+    	        })
+    	        .progress(onProgress)
+    	        .success(onSuccess);
             },
             create: function (data, callback) {
                 var cb = callback || angular.noop;

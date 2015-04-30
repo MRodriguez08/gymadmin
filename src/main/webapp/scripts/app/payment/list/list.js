@@ -5,7 +5,7 @@ angular.module('gymAdminApp')
         $stateProvider
             .state('payment.list', {
                 parent: 'payment',
-                url: '/listPayment',
+                url: '/',
                 data: {
                     roles: [ 'ROLE_ADMIN' , 'ROLE_USER'], 
                     pageTitle: 'payment.title.list'

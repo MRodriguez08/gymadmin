@@ -58,9 +58,13 @@
     	$scope.gridScope = $scope;
     	$scope.gridOptions = {
     		enableFiltering: true,
+    		rowTemplate: '<div ng-class="{\'pending\':row.entity.state.id===1,  \'about-to-overdue\':row.entity.state.id===3,  \'overdue\':row.entity.state.id===4}" <div ng-repeat="col in colContainer.renderedColumns track by col.colDef.name"  class="ui-grid-cell" ui-grid-cell></div></div>',
 	        enableSorting: true,
 	        columnDefs: [
-	          { displayName: $translate.instant('payment.grid.id'), field: 'id', maxWidth : 80 },
+	          { displayName: $translate.instant('payment.grid.id'), field: 'id', maxWidth : 20 },	          
+	          { displayName: $translate.instant('payment.grid.customer.name') , field: 'customer.name'},
+	          { displayName: $translate.instant('payment.grid.state.name') , field: 'state.name'},
+	          { displayName: $translate.instant('payment.grid.paymentDueDate') , field: 'paymentDueDate', cellFilter: "date:'dd/MM/yyyy HH:mm'" },
 	          { displayName: $translate.instant('payment.grid.validCost') , field: 'validCost'}, 
 	          { name: ' ', enableFiltering: false, cellTemplate:'<span class="grid-action-glyphicon glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'plan.update\',row.entity.id)"></span>', maxWidth : 20 },  
 	          { name: '  ', enableFiltering: false, cellTemplate:'<span class=" grid-action-glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 20  }

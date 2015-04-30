@@ -5,7 +5,7 @@ angular.module('gymAdminApp')
         $stateProvider
             .state('home', {
                 parent: 'site',
-                url: '/',
+                url: '/main',
                 data: {
                     
                 },

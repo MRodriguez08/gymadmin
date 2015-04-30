@@ -11,7 +11,8 @@
         	"cellphone" : "Telefono",
         	"email" : "Email",
         	"address" : "Direccion",
-        	"plan" : "Plan"
+        	"plan" : "Plan",
+        	"avatar" : "Seleccione un avatar"
         },
         "grid" : {
         	"id" : "Id",

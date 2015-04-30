@@ -11,7 +11,7 @@ angular.module('gymAdminApp')
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/main/main.html',
+                        templateUrl: 'app/account/login/login.html',
                         controller: 'LogoutController'
                     }
                 }

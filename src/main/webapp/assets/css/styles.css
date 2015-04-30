@@ -13,3 +13,15 @@
 .bottom-buttons {
   padding-top: 1%;
 }
+
+.overdue {
+	background-color: rgb(255, 150, 150) !important;
+}
+
+.about-to-overdue {
+	background-color: rgb(245, 245, 154) !important;
+}
+
+.pending {
+	background-color: rgb(164, 236, 164) !important;
+}

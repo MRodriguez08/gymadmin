@@ -55,6 +55,9 @@ public class CustomerEntity implements Serializable {
     @Column(name = "address", nullable = true, length = 100)
     private String address;
     
+    @Column(name = "image", nullable = true, length = 512)
+    private String image;
+    
     @Column(name = "registration_date", nullable = false)
     private Long registrationDate;
     
@@ -136,6 +139,14 @@ public class CustomerEntity implements Serializable {
 
 	public void setRegistrationDate(Long registrationDate) {
 		this.registrationDate = registrationDate;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }

@@ -1,6 +1,10 @@
 package com.gymadmin.web.rest;
 
+import java.io.File;
 import java.util.List;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gymadmin.config.Constants;
 import com.gymadmin.persistence.entities.CustomerEntity;
 import com.gymadmin.repository.BusinessException;
 import com.gymadmin.repository.JSonFactory;
@@ -65,7 +70,7 @@ public class CustomerResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> create(@RequestBody CustomerEntity e) {
+	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody CustomerEntity e) {
 		try {
 			CustomerEntity p = customerService.create(e);
 			return new ResponseEntity<>(p , HttpStatus.OK);
@@ -78,9 +83,11 @@ public class CustomerResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> update(@RequestBody CustomerEntity e) {
+	public ResponseEntity<?> update( HttpServletRequest request, @RequestBody CustomerEntity e) {
 		try {
+			e.setImage((String)request.getSession().getAttribute(Constants.PENDING_FILE_SESS_VAR));
 			CustomerEntity p = customerService.edit(e);
+			request.getSession().setAttribute(Constants.PENDING_FILE_SESS_VAR , null);
 			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
