@@ -15,4 +15,14 @@ public class DateTimeUtil {
         return cal.getTime();
     }
 	
+	public static Date getNextDueDate(Integer monthsCount, Integer dueDateMonthDay)
+    {
+        Calendar cal = Calendar.getInstance();
+        Date now = new Date();
+        cal.setTime(now);
+        cal.add(Calendar.MONTH, monthsCount);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), dueDateMonthDay);
+        return cal.getTime();
+    }
+	
 }

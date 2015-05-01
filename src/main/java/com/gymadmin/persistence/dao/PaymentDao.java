@@ -6,6 +6,8 @@
 
 package com.gymadmin.persistence.dao;
 
+import java.util.List;
+
 import com.gymadmin.persistence.entities.PaymentEntity;
 
 
@@ -15,4 +17,6 @@ import com.gymadmin.persistence.entities.PaymentEntity;
  */
 public interface PaymentDao extends Dao<Integer , PaymentEntity> {
     
+	public List<PaymentEntity> findActiveByCustomer(Integer customerId);
+	
 }

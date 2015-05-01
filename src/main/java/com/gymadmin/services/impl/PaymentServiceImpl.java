@@ -6,10 +6,15 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.gymadmin.config.Constants;
+import com.gymadmin.persistence.dao.CustomerDao;
 import com.gymadmin.persistence.dao.PaymentDao;
 import com.gymadmin.persistence.dao.PaymentStateDao;
+import com.gymadmin.persistence.dao.SysParamDao;
+import com.gymadmin.persistence.entities.CustomerEntity;
 import com.gymadmin.persistence.entities.PaymentEntity;
 import com.gymadmin.repository.BusinessException;
 import com.gymadmin.repository.DateTimeUtil;
@@ -26,13 +31,19 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	private PaymentDao paymentDao;
+	
+	@Autowired
+	private SysParamDao sysParamDao;
 
 	@Autowired
 	private PaymentStateDao paymentStateDao;
 	
+	@Autowired
+	private CustomerDao customerDao;
+	
 	public List<PaymentEntity> findAll() {
 
-		List<PaymentEntity> users = paymentDao.findAll();	
+		List<PaymentEntity> users = paymentDao.findAll();
 
 		return users;
 	}
@@ -44,11 +55,7 @@ public class PaymentServiceImpl implements PaymentService {
 
 	public PaymentEntity create(PaymentEntity d) throws Exception {
 		
-		d.setPaymentGenerationDate(new Date()); 
-		d.setPaymentDueDate(DateTimeUtil.addDays(new Date(), d.getPaymentPlan().getMonthsCount()));
-		d.setState(paymentStateDao.findById(1));
 		
-		paymentDao.persist(d);
 		return d;
 	}
 
@@ -67,12 +74,48 @@ public class PaymentServiceImpl implements PaymentService {
 	public void delete(Integer id) throws Exception {
 		try {
 			PaymentEntity entity = paymentDao.findById(id);
-			entity.setCanceled(true);
+			entity.setState(paymentStateDao.findById(Constants.PAYMENT_STATE_CANCELLED));
 			paymentDao.merge(entity);		
 		} catch (Exception e) {
 			logger.error(getClass().getCanonicalName() , e);
 			throw new BusinessException("Error al eliminar plan");
 		}
+		
+	}
+	
+	@Scheduled(fixedDelay = 5000)
+    public void generatePayments(){
+    	try {
+    		logger.info("Generating payments...");   		
+    		Integer dueDateMonthDay =  Integer.valueOf(sysParamDao.findById(Constants.SYSPARAM_DUE_DATE_MONTH_DAY).getValue());
+    		
+    		List<CustomerEntity> customers = customerDao.findAllByState(true);
+    		for (CustomerEntity e : customers){
+    			logger.info("Checking payments for " + e.getName());
+				
+    			//Si no hay cuotas pendientes o por vencer tengo que generar una nueva factura
+    			List<PaymentEntity> activePayments = paymentDao.findActiveByCustomer(e.getId());
+    			if (activePayments.size() == 0){
+    				
+    				PaymentEntity newPayment = new PaymentEntity();
+    				newPayment.setPaymentGenerationDate(new Date());
+    				newPayment.setCustomer(e);
+    				newPayment.setPlan(e.getPlan());
+    				newPayment.setValidCost(e.getPlan().getCost());
+    				newPayment.setPaymentDueDate(DateTimeUtil.getNextDueDate(e.getPaymentPlan().getMonthsCount(), dueDateMonthDay)); 
+    				newPayment.setState(paymentStateDao.findById(Constants.PAYMENT_STATE_PENDING));
+    				
+    				paymentDao.persist(newPayment);
+    			}   			
+    			
+    		}			
+		} catch (Exception e) {
+			logger.error(getClass().getCanonicalName() , e);
+		}
+    }
+
+	public void updatePaymentsState() {
+		
 		
 	}
 

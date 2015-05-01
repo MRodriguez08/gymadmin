@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('gymAdminApp')
-    .controller('CreateCustomerController', ['$scope', '$log', '$state', 'CustomerService', 'PlanService', function ( $scope, $log, $state, CustomerService, PlanService) {
+    .controller('CreateCustomerController', ['$scope', '$log', '$translate', '$state', 'CustomerService', 'PlanService', 'PaymentPlanService', function ( $scope, $log, $translate, $state, CustomerService, PlanService, PaymentPlanService) {
     	
     	$scope.error = false;
     	$scope.succes = false;
@@ -12,26 +12,31 @@
     	PlanService.getAll({} , function (response) {
             $scope.plansList = response;
         }, function (response) {
-        	alert('Error recuperando planes');             
+        	alert($translate.instant('customer.messages.error.retrievePlans'));             
         });
     	
+    	PaymentPlanService.getAll({} , function (response) {
+            $scope.paymentPlansList = response;
+        }, function (response) {
+        	alert($translate.instant('customer.messages.error.retrievePaymentPlans'));
+        });    	
     	
     	$scope.create = function () {
             
     		CustomerService.create($scope.model).then(function (response) {
     			bootbox.dialog({
-    				  message: "Cliente ingresado con exito",
-    				  title: "Clientes",
-    				  buttons: {
-    				    success: {
-    				      label: "Aceptar",
-    				      className: "btn-success",
-    				      callback: function() {		
-    				    	  $state.reload();
-    				    	  $scope.model = {};
-    				      }
-    				    }
-    				  }
+				  message: $translate.instant('customer.messages.success.create'),
+				  title: $translate.instant('customer.title.create'),
+				  buttons: {
+				    success: {
+				      label: "Aceptar",
+				      className: "btn-success",
+				      callback: function() {		
+				    	  $state.reload();
+				    	  $scope.model = {};
+				      }
+				    }
+				  }
     			});		    	
     		}).catch(function(response) {
     			switch(response.status) {

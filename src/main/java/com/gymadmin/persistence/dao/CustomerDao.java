@@ -17,5 +17,7 @@ import com.gymadmin.persistence.entities.CustomerEntity;
  * @author mrodriguez
  */
 public interface CustomerDao extends Dao<Integer , CustomerEntity> {
+	
+	public List<CustomerEntity> findAllByState(Boolean Enabled);
 
 }

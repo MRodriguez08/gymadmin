@@ -54,7 +54,7 @@ public class PlanEntity implements Serializable  {
     private List<PaymentEntity> payments;
     
     @JsonIgnore
-    @OneToMany(mappedBy="currentPlan", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="plan", fetch=FetchType.LAZY)
     private List<CustomerEntity> customers;
     
 	public Integer getId() {

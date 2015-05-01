@@ -10,11 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "payments")
+@NamedQueries( { 
+	@NamedQuery(name = "PaymentEntity.findActiveByCustomer", 
+		query = "SELECT e FROM PaymentEntity e " +
+				"WHERE (e.state.id = 1 or e.state.id = 2) and e.customer.id = :customerId"),
+})
 public class PaymentEntity implements Serializable {
     
     /**
@@ -51,13 +58,6 @@ public class PaymentEntity implements Serializable {
 	
 	@Column(name = "payment_due_date", nullable = false)
     private Date paymentDueDate;
-	
-	@ManyToOne
-	@JoinColumn(name = "payment_plan_id", nullable = false)
-	private PaymentPlanEntity paymentPlan;
-
-	@Column(name = "is_canceled", nullable = true)
-    private Boolean canceled;
 	
 	public Integer getId() {
 		return id;
@@ -113,22 +113,6 @@ public class PaymentEntity implements Serializable {
 
 	public void setPlan(PlanEntity plan) {
 		this.plan = plan;
-	}
-
-	public PaymentPlanEntity getPaymentPlan() {
-		return paymentPlan;
-	}
-
-	public void setPaymentPlan(PaymentPlanEntity paymentMethod) {
-		this.paymentPlan = paymentMethod;
-	}
-
-	public Boolean getCanceled() {
-		return canceled;
-	}
-
-	public void setCanceled(Boolean canceled) {
-		this.canceled = canceled;
 	}
 
 	public Date getPaymentGenerationDate() {

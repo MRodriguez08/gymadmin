@@ -12,7 +12,8 @@
         	"email" : "Email",
         	"address" : "Direccion",
         	"plan" : "Plan",
-        	"avatar" : "Seleccione un avatar"
+        	"avatar" : "Seleccione un avatar",
+        	"paymentPlan" : "Plan de pago"
         },
         "grid" : {
         	"id" : "Id",
@@ -24,7 +25,22 @@
         	"currentPlan.name" : "Plan"
         },
         "placeholders" : {
-        	"select.plan" : "Selecciona el plan de cliente"
-        }
+        	"select.plan" : "Selecciona el plan de cliente",
+        	"select.paymentPlan" : "Seleccione el plan de pago"
+        },
+    	"messages" : {
+    		"error" : {
+    			"retrieveCustomers" : "Error recuperando clientes",
+    			"retrievePaymentPlans" : "Error recuperando planes de pago"
+    		},
+    		"success" : {
+    			"create" : "Pago ingresado con exito",
+    			"delete" : "Pago cancelado con exito",
+    			"retrievePaymentPlan" : "Error recuperando planes de pago"
+    		},
+    		"confirmation": {
+    			"deletion": "Estar seguro que quieres cancelar este pago?"
+    		}
+    	}
     }
 }

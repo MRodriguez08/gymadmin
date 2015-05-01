@@ -3,22 +3,16 @@ package com.gymadmin.services.impl;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletContext;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.gymadmin.config.Constants;
 import com.gymadmin.persistence.dao.CustomerDao;
-import com.gymadmin.persistence.dao.PaymentDao;
-import com.gymadmin.persistence.dao.PaymentStateDao;
 import com.gymadmin.persistence.entities.CustomerEntity;
-import com.gymadmin.persistence.entities.PaymentEntity;
-import com.gymadmin.persistence.entities.PaymentStateEntity;
 import com.gymadmin.repository.BusinessException;
 import com.gymadmin.services.CustomerService;
 
@@ -75,12 +69,12 @@ public class CustomerServiceImpl implements CustomerService {
     public void delete(Integer id) throws Exception {
         try {
         	CustomerEntity entity = customerDao.findById(id);
-        	customerDao.remove(entity);
+        	entity.setActive(false);
+        	customerDao.merge(entity);
 		} catch (Exception e) {
 			logger.error(getClass().getCanonicalName() , e);
 			throw new BusinessException("Error al eliminar cliente");
-		}
-      
+		}      
     }
     
     private String updateAvatar(String oldFile, String newfile) throws Exception{

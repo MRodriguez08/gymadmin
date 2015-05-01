@@ -23,4 +23,8 @@ public interface PaymentService {
     
     public void delete(Integer Id) throws Exception;
     
+    public void generatePayments();
+    
+    public void updatePaymentsState();
+    
 }

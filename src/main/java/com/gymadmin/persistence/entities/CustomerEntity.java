@@ -25,7 +25,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NamedQueries( { 
 	@NamedQuery(name = "CustomerEntity.findByFilters", 
 		query = "SELECT e FROM CustomerEntity e " +
-				"WHERE upper(e.name) LIKE :name AND upper(e.surname) LIKE :surname AND upper(e.email) LIKE :email")
+				"WHERE upper(e.name) LIKE :name AND upper(e.surname) LIKE :surname AND upper(e.email) LIKE :email"),
+	@NamedQuery(name = "CustomerEntity.findAllByState", 
+		query = "SELECT e FROM CustomerEntity e " +
+				"WHERE e.active = :active")
 })
 public class CustomerEntity implements Serializable {
     
@@ -61,13 +64,20 @@ public class CustomerEntity implements Serializable {
     @Column(name = "registration_date", nullable = false)
     private Long registrationDate;
     
+    @Column(name = "active", nullable = true)
+    private Boolean active;
+    
     @JsonIgnore
     @OneToMany(mappedBy="customer", fetch=FetchType.LAZY)
     private List<PaymentEntity> payments;
 
     @ManyToOne
 	@JoinColumn(name = "plan_id", nullable = false)
-	private PlanEntity currentPlan;
+	private PlanEntity plan;
+    
+	@ManyToOne
+	@JoinColumn(name = "payment_plan_id", nullable = false)
+	private PaymentPlanEntity paymentPlan;
 
 	public Integer getId() {
 		return id;
@@ -125,12 +135,12 @@ public class CustomerEntity implements Serializable {
 		this.payments = payments;
 	}
 
-	public PlanEntity getCurrentPlan() {
-		return currentPlan;
+	public PlanEntity getPlan() {
+		return plan;
 	}
 
-	public void setCurrentPlan(PlanEntity currentPlan) {
-		this.currentPlan = currentPlan;
+	public void setPlan(PlanEntity plan) {
+		this.plan = plan;
 	}
 
 	public Long getRegistrationDate() {
@@ -147,6 +157,22 @@ public class CustomerEntity implements Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public PaymentPlanEntity getPaymentPlan() {
+		return paymentPlan;
+	}
+
+	public void setPaymentPlan(PaymentPlanEntity paymentPlan) {
+		this.paymentPlan = paymentPlan;
 	}
 	
 }

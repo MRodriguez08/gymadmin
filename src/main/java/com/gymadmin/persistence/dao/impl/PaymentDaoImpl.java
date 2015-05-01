@@ -6,6 +6,10 @@
 
 package com.gymadmin.persistence.dao.impl;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Component;
 
 import com.gymadmin.persistence.dao.PaymentDao;
@@ -17,5 +21,12 @@ import com.gymadmin.persistence.entities.PaymentEntity;
  */
 @Component("paymentDao")
 public class PaymentDaoImpl extends DaoImpl<Integer , PaymentEntity> implements PaymentDao {
+
+	@Override
+	public List<PaymentEntity> findActiveByCustomer(Integer customerId) {
+		Query namedQuery = em.createNamedQuery("PaymentEntity.findActiveByCustomer");
+		namedQuery.setParameter("customerId", customerId);
+		return (List<PaymentEntity>)namedQuery.getResultList();
+	}
     
 }

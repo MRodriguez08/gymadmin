@@ -16,5 +16,13 @@ public final class Constants {
     public static final String CUSTOMERS_IMAGE_PATH = "/assets/images/customers";
     
     public static final String PENDING_FILE_SESS_VAR = "pendingFile";
+    
+    public static final Integer PAYMENT_STATE_PENDING = 1;
+    public static final Integer PAYMENT_STATE_ABOUT_TO_OVERDUE = 2;
+    public static final Integer PAYMENT_STATE_PAID = 3;
+    public static final Integer PAYMENT_STATE_OVERDUE = 4;
+    public static final Integer PAYMENT_STATE_CANCELLED = 5;
+    
+    public static final String SYSPARAM_DUE_DATE_MONTH_DAY = "dueDateMonthDay";
 
 }
