@@ -2,10 +2,48 @@
     <div class="row">
         <div class="col-md-12">
             <h1 translate="payment.title.list">List</h1>
-		    <div class="grid" ui-grid="gridOptions" ui-grid-auto-resize></div>
         </div>
+        <div class="col-md-12">
+        	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="headingOne">
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			          Filtros
+			        </a>
+			      </h4>
+			    </div>
+			    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+			      <div class="panel-body">
+			        <form>
+			        <div class="row">
+			        	<div class="col-md-6">
+							<div class="form-group">
+							    <label  class="control-label" translate="payment.form.state" for="filter-state">Name</label>
+		    				    <select id="filter-state" name="filter-state" class="form-control" ng-model="filterModel.stateId" ng-options="item.id as item.name for item in paymentStatesList">
+							    	<option translate="global.placeholders.all" value="">Select the payment state</option>
+								</select>
+							</div>
+						</div>
+			        	<div class="col-md-6">
+							<div class="form-group">
+							    <label  class="control-label" translate="payment.form.customer" for="name">Name</label>
+							    <input name="filter-customer-name" ng-model="filterModel.customerName" type="text" class="form-control" id="filter-customer-name" >
+							</div>
+						</div>
+					</div>
+					  	<button translate="global.buttons.refresh" type="button" class="btn btn-success" ng-click="refresh()">Refresh</button>
+					</form>
+			      </div>
+			    </div>
+			  </div>		  
+			</div>
+        </div>
+        <div class="col-md-12">
+		    <div class="grid" ui-grid="gridOptions" ui-grid-auto-resize></div>
+        </div>        
          <div class="bottom-buttons col-md-12">
-            <button translate="global.buttons.refresh" type="button" class="btn btn-success" ng-click="refresh()">Refresh</button>
+            
             <button translate="global.buttons.create" type="button" class="btn btn-success" ng-click="go('payment.create')">Create</button>
         </div>
     </div>

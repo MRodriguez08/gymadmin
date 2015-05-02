@@ -43,7 +43,7 @@ public class SysParamEntity implements Serializable  {
 	}
 
 	public String getValue() {
-		return value;
+		return value.trim();
 	}
 
 	public void setValue(String value) {

@@ -21,6 +21,14 @@ import javax.persistence.Table;
 	@NamedQuery(name = "PaymentEntity.findActiveByCustomer", 
 		query = "SELECT e FROM PaymentEntity e " +
 				"WHERE (e.state.id = 1 or e.state.id = 2) and e.customer.id = :customerId"),
+	@NamedQuery(name = "PaymentEntity.findActive", 
+		query = "SELECT e FROM PaymentEntity e " +
+				"WHERE (e.state.id = 1 or e.state.id = 2)"),
+	@NamedQuery(name = "PaymentEntity.findAllByFilters", 
+		query = "SELECT e FROM PaymentEntity e " +
+				"WHERE ( (:stateId = 0 and (e.state.id = 1 or e.state.id = 2 or e.state.id = 4) ) or (:stateId <> 0 and e.state.id = :stateId) ) "
+				+ "and (upper(e.customer.name) like upper(:customerName))"
+				+ "ORDER by e.paymentDueDate ASC"),
 })
 public class PaymentEntity implements Serializable {
     

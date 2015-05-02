@@ -1,6 +1,8 @@
 package com.gymadmin.web.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gymadmin.persistence.entities.PaymentEntity;
@@ -28,9 +31,12 @@ public class PaymentResource {
 	private PaymentService paymentService;	
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<?> getAll() {
+	public ResponseEntity<?> getAll(@RequestParam(required=false) Integer stateId, @RequestParam(required=false) String customerName) {
 		try {
-			List<PaymentEntity> plansList = paymentService.findAll();
+			Map<String, Object> filters = new HashMap<String , Object>();
+			filters.put("stateId", stateId);
+			filters.put("customerName", customerName);
+			List<PaymentEntity> plansList = paymentService.findByFilters(filters);
 			return new ResponseEntity<>( plansList, HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(getClass().getCanonicalName() , e);
@@ -80,7 +86,7 @@ public class PaymentResource {
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<?> update(@RequestBody PaymentEntity e) {
 		try {
-			PaymentEntity p = paymentService.edit(e);
+			PaymentEntity p = paymentService.pay(e);
 			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);

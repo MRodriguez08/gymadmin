@@ -13,11 +13,13 @@ public interface PaymentService {
     
     public List<PaymentEntity> findAll();
     
-    public List<PaymentEntity> findByFilters(Map<String , String> filters);
+    public List<PaymentEntity> findByFilters(Map<String , Object> filters);
     
     public PaymentEntity create(PaymentEntity e) throws Exception;
     
     public PaymentEntity edit(PaymentEntity e) throws Exception;
+    
+    public PaymentEntity pay(PaymentEntity e) throws Exception;
     
     public PaymentEntity get(Integer Id) throws Exception;
     

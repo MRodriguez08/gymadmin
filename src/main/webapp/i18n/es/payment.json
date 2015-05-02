@@ -2,7 +2,7 @@
     "payment": {
         "title" : {
         	"create" : "Crear nuevo pago",
-        	"update" : "Modificar pago",
+        	"pay" : "Confirmar pago",
         	"list" : "Listado de pagos"
     	},     
         "grid" : {
@@ -12,16 +12,22 @@
 			"validCost" : "Costo",
 			"paymentDueDate" : "Vence"
         },
+        "tooltip" : {
+			"cancel" : "Cancelar",
+			"pay" : "Pagar"
+        },
         "form" : {
         	"customer" : "Cliente",
         	"validCost" : "Costo actual",
         	"plan" : "Plan",
         	"planCost" : "Costo del plan",
-        	"paymentPlan" : "Plan de pago"
+        	"paymentPlan" : "Plan de pago",
+        	"state" : "Estado"
         },
         "placeholders" : {
         	"select.customer" : "Seleccione el cliente",
-        	"select.paymentPlan" : "Seleccione el plan de pago"
+        	"select.paymentPlan" : "Seleccione el plan de pago",
+        	"select.paymentState" : "Seleccione el estado del pago"
     	},
     	"messages" : {
     		"error" : {
@@ -31,10 +37,11 @@
     		"success" : {
     			"create" : "Pago ingresado con exito",
     			"delete" : "Pago cancelado con exito",
-    			"retrievePaymentPlan" : "Error recuperando planes de pago"
+    			"pay" : "Cuota pagada con exito"
     		},
     		"confirmation": {
-    			"deletion": "Estar seguro que quieres cancelar este pago?"
+    			"deletion": "Estar seguro que quieres cancelar este pago?",
+    			"payment": "Estas seguro que quieres marcar esta cuota como paga?"
     		}
     	}
 	}

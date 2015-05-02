@@ -7,9 +7,11 @@
 package com.gymadmin.persistence.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Query;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
 import com.gymadmin.persistence.dao.PaymentDao;
@@ -26,6 +28,20 @@ public class PaymentDaoImpl extends DaoImpl<Integer , PaymentEntity> implements 
 	public List<PaymentEntity> findActiveByCustomer(Integer customerId) {
 		Query namedQuery = em.createNamedQuery("PaymentEntity.findActiveByCustomer");
 		namedQuery.setParameter("customerId", customerId);
+		return (List<PaymentEntity>)namedQuery.getResultList();
+	}
+	
+	@Override
+	public List<PaymentEntity> findActive() {
+		Query namedQuery = em.createNamedQuery("PaymentEntity.findActive");
+		return (List<PaymentEntity>)namedQuery.getResultList();
+	}
+	
+	@Override
+	public List<PaymentEntity> findByFilters(Map<String , Object> filters) {
+		Query namedQuery = em.createNamedQuery("PaymentEntity.findAllByFilters");
+		namedQuery.setParameter("stateId", filters.get("stateId") == null ? 0 :  (Integer)filters.get("stateId") );
+		namedQuery.setParameter("customerName", "%" + ( filters.get("customerName") == null ? "" : (String)filters.get("customerName") ) + "%" );
 		return (List<PaymentEntity>)namedQuery.getResultList();
 	}
     

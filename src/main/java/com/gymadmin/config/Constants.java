@@ -24,5 +24,9 @@ public final class Constants {
     public static final Integer PAYMENT_STATE_CANCELLED = 5;
     
     public static final String SYSPARAM_DUE_DATE_MONTH_DAY = "dueDateMonthDay";
+    public static final String SYSPARAM_ABOUT_TO_OVERDUE_DAYS = "aboutToOverDays";
+    public static final String SYSPARAM_OVERDUE_RECHARGE = "overdueRecharge";
+    
+    
 
 }

@@ -3,6 +3,10 @@ package com.gymadmin.repository;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.ReadableInstant;
+
 public class DateTimeUtil {
 	
 	private DateTimeUtil(){}
@@ -25,4 +29,11 @@ public class DateTimeUtil {
         return cal.getTime();
     }
 	
+	public static Integer getRemainingDays(Date now, Date dueDate){		
+		DateTime start = new DateTime(now);
+		DateTime end = new DateTime(dueDate);
+		return Days.daysBetween(start, end).getDays();
+	}
+	
 }
+

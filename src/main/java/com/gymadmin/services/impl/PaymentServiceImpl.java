@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gymadmin.config.Constants;
 import com.gymadmin.persistence.dao.CustomerDao;
@@ -16,6 +17,7 @@ import com.gymadmin.persistence.dao.PaymentStateDao;
 import com.gymadmin.persistence.dao.SysParamDao;
 import com.gymadmin.persistence.entities.CustomerEntity;
 import com.gymadmin.persistence.entities.PaymentEntity;
+import com.gymadmin.persistence.entities.PaymentStateEntity;
 import com.gymadmin.repository.BusinessException;
 import com.gymadmin.repository.DateTimeUtil;
 import com.gymadmin.services.PaymentService;
@@ -48,9 +50,9 @@ public class PaymentServiceImpl implements PaymentService {
 		return users;
 	}
 
-	public List<PaymentEntity> findByFilters(Map<String, String> filters) {
+	public List<PaymentEntity> findByFilters(Map<String, Object> filters) {
 		
-		return null;
+		return paymentDao.findByFilters(filters);
 	}
 
 	public PaymentEntity create(PaymentEntity d) throws Exception {
@@ -64,6 +66,16 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		paymentDao.merge(d);
 		return d;
+	}
+	
+	public PaymentEntity pay(PaymentEntity d) throws Exception {
+
+		PaymentStateEntity paidState = paymentStateDao.findById(Constants.PAYMENT_STATE_PAID);
+		PaymentEntity p = paymentDao.findById(d.getId());
+		p.setState(paidState);		
+		paymentDao.merge(p);
+		
+		return p;
 	}
 
 	public PaymentEntity get(Integer id) throws Exception {
@@ -83,7 +95,8 @@ public class PaymentServiceImpl implements PaymentService {
 		
 	}
 	
-	@Scheduled(fixedDelay = 5000)
+	@Transactional(readOnly = false)
+	//@Scheduled(fixedDelay = 10000, initialDelay = 5000)
     public void generatePayments(){
     	try {
     		logger.info("Generating payments...");   		
@@ -91,7 +104,6 @@ public class PaymentServiceImpl implements PaymentService {
     		
     		List<CustomerEntity> customers = customerDao.findAllByState(true);
     		for (CustomerEntity e : customers){
-    			logger.info("Checking payments for " + e.getName());
 				
     			//Si no hay cuotas pendientes o por vencer tengo que generar una nueva factura
     			List<PaymentEntity> activePayments = paymentDao.findActiveByCustomer(e.getId());
@@ -113,10 +125,43 @@ public class PaymentServiceImpl implements PaymentService {
 			logger.error(getClass().getCanonicalName() , e);
 		}
     }
-
+	
+	@Transactional(readOnly = false)
+	//@Scheduled(fixedDelay = 10000, initialDelay = 0)
 	public void updatePaymentsState() {
-		
-		
+		try {
+			logger.info("Updating payments state...");
+			
+			Integer aboutToOverDays =  Integer.valueOf(sysParamDao.findById(Constants.SYSPARAM_ABOUT_TO_OVERDUE_DAYS).getValue());
+			PaymentStateEntity aboutToOverdue = paymentStateDao.findById(Constants.PAYMENT_STATE_ABOUT_TO_OVERDUE);
+			PaymentStateEntity overdue = paymentStateDao.findById(Constants.PAYMENT_STATE_OVERDUE);
+			Float recharge = 1 + Float.valueOf(sysParamDao.findById(Constants.SYSPARAM_OVERDUE_RECHARGE).getValue()) / 100;
+			Date now = new Date();
+			
+			List<PaymentEntity> payments = paymentDao.findActive();
+			for (PaymentEntity e : payments){
+				
+				Boolean changed = false;
+				Integer remainingDays = DateTimeUtil.getRemainingDays(now, e.getPaymentDueDate());
+				
+				if (remainingDays <= 0){ //aboutToOverdue -> overdue transition
+					e.setState(overdue);
+					//apply the recharge
+					e.setValidCost(e.getValidCost() * recharge);
+					changed = true;
+				} else if (remainingDays <= aboutToOverDays){ //pending -> aboutToOverdue transition
+					e.setState(aboutToOverdue);
+					changed = true;
+				}	
+				
+				if ( changed ){
+					paymentDao.merge(e);
+				}
+			}			
+			
+		} catch (Exception e) {
+			logger.error(getClass().getCanonicalName() , e);
+		}		
 	}
 
 }
