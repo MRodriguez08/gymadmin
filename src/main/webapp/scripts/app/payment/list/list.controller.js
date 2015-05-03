@@ -14,7 +14,7 @@
     	/**
     	 * Update action
     	 */
-    	$scope.delete = function( id ) {    		
+    	$scope.delete = function( id ) {
     		bootbox.confirm({
     			message : $translate.instant('payment.messages.confirmation.deletion'),
     			buttons: {
@@ -34,7 +34,7 @@
         };
         
         /**
-    	 * Update action
+    	 * Pay action
     	 */
         $scope.pay = function( rowItem ){
         	bootbox.confirm({
@@ -55,6 +55,9 @@
     		});
         };
         
+        /**
+         * Deletion callback
+         */
         $scope.deleteCallback = function(id){
         	PaymentService.delete({id : id}).then(function (response) {
     			bootbox.dialog({
@@ -87,6 +90,9 @@
             });
 		};
         
+		/**
+         * Payment callback
+         */
         $scope.payCallback = function(rowItem){
         	PaymentService.update(rowItem).then(function (response) {
     			$scope.model = response;

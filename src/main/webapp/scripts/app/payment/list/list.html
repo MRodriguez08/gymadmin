@@ -32,7 +32,9 @@
 							</div>
 						</div>
 					</div>
-					  	<button translate="global.buttons.refresh" type="button" class="btn btn-success" ng-click="refresh()">Refresh</button>
+					  	<button  type="button" class="btn btn-default" ng-click="refresh()">
+					  		<span class="glyphicon glyphicon-filter" aria-hidden="true" translate="global.buttons.refresh"> Refresh</span>					  		
+					  	</button>
 					</form>
 			      </div>
 			    </div>
@@ -41,10 +43,6 @@
         </div>
         <div class="col-md-12">
 		    <div class="grid" ui-grid="gridOptions" ui-grid-auto-resize></div>
-        </div>        
-         <div class="bottom-buttons col-md-12">
-            
-            <button translate="global.buttons.create" type="button" class="btn btn-success" ng-click="go('payment.create')">Create</button>
         </div>
     </div>
 </div>
