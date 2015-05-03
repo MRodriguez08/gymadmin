@@ -7,7 +7,9 @@
             "delete": "Eliminar",
             "create": "Crear",
             "back": "Volver",
-            "accept": "Aceptar"
+            "accept": "Aceptar",
+            "confirm": "Confirmar",
+            "cancel": "Cancelar"
         },
         "menu": {
             "home": "Home",

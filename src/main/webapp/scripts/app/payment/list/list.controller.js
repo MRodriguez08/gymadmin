@@ -14,83 +14,113 @@
     	/**
     	 * Update action
     	 */
-    	$scope.delete = function( id ) {
-    		
-    		bootbox.confirm($translate.instant('payment.messages.confirmation.deletion'), function(result) {
-    			if (result){
-    				PaymentService.delete({id : id}).then(function (response) {
-    	    			bootbox.dialog({
-    	    				  message: $translate.instant('payment.messages.success.delete'),
-    	    				  title: "Pagos",
-    	    				  buttons: {
-    	    				    success: {
-    	    				      label: "Aceptar",
-    	    				      className: "btn-success",
-    	    				      callback: function() {		
-    	    				    	  $state.reload();
-    	    				    	  $scope.planModel = {};
-    	    				      }
-    	    				    }
-    	    				  }
-    	    			});		    	
-    	    		}).catch(function(response) {
-    	    			switch(response.status) {
-    		    		    case 500:
-    		    		    	alert('Error interno de la aplicacion');
-    		    		        break;
-    		    		    case 400:
-    		    		    	$scope.error = true;
-    		    		    	$scope.errorMessage = response.data.message;
-    		    		        break;
-    		    		    default:
-    		    		        
-    		    		}
-    	    			$scope.processing = false;
-    	            });
+    	$scope.delete = function( id ) {    		
+    		bootbox.confirm({
+    			message : $translate.instant('payment.messages.confirmation.deletion'),
+    			buttons: {
+    				confirm: {
+    					label: $translate.instant('global.buttons.confirm'),
+    				},
+    				cancel: {
+    					label: $translate.instant('global.buttons.cancel'),
+    				}
+    			},
+    			callback: function(result){
+    				if (result){
+    					$scope.deleteCallback(id);
+    				}
     			}
-    		});   		
-    		
+    		});
         };
         
         /**
     	 * Update action
     	 */
         $scope.pay = function( rowItem ){
-        	bootbox.confirm($translate.instant('payment.messages.confirmation.payment') , function(result) {
-        		if (result){
-		        	PaymentService.update(rowItem).then(function (response) {
-		    			$scope.model = response;
-		    			bootbox.dialog({
-		    				  message: $translate.instant('payment.messages.success.pay'),
-		    				  title: $translate.instant('payment.title.pay'),
-		    				  buttons: {
-		    				    success: {
-		    				      label: "Aceptar",
-		    				      className: "btn-success",
-		    				      callback: function() {		
-		    				    	  $state.reload();
-		    				    	  $scope.planModel = {};
-		    				      }
-		    				    }
-		    				  }
-		    			});
-		    		}).catch(function(response) {
-		    			switch(response.status) {
-			    		    case 500:
-			    		    	$translate.instant('global.messages.error.internalServerError');
-			    		        break;
-			    		    case 400:
-			    		    	$scope.error = true;
-			    		    	$scope.errorMessage = response.data.message;
-			    		        break;
-			    		    default:
-			    		        
-			    		}
-		    			$scope.processing = false;
-		            }); 
-        		}
-        	});
+        	bootbox.confirm({
+    			message : $translate.instant('payment.messages.confirmation.payment'),
+    			buttons: {
+    				confirm: {
+    					label: $translate.instant('global.buttons.confirm'),
+    				},
+    				cancel: {
+    					label: $translate.instant('global.buttons.cancel'),
+    				}
+    			},
+    			callback: function(result){
+    				if (result){
+    					$scope.payCallback(rowItem);
+    				}
+    			}
+    		});
         };
+        
+        $scope.deleteCallback = function(id){
+        	PaymentService.delete({id : id}).then(function (response) {
+    			bootbox.dialog({
+    				  message: $translate.instant('payment.messages.success.delete'),
+    				  title: $translate.instant('global.menu.payments.main'),
+    				  buttons: {
+    				    success: {
+    				      label: $translate.instant('global.buttons.accept'),
+    				      className: "btn-primary",
+    				      callback: function() {		
+    				    	  $state.reload();
+    				    	  $scope.planModel = {};
+    				      }
+    				    }
+    				  }
+    			});		    	
+    		}).catch(function(response) {
+    			switch(response.status) {
+	    		    case 500:
+	    		    	$translate.instant('global.messages.error.internalServerError');
+	    		        break;
+	    		    case 400:
+	    		    	$scope.error = true;
+	    		    	$scope.errorMessage = response.data.message;
+	    		        break;
+	    		    default:
+	    		        
+	    		}
+    			$scope.processing = false;
+            });
+		};
+        
+        $scope.payCallback = function(rowItem){
+        	PaymentService.update(rowItem).then(function (response) {
+    			$scope.model = response;
+    			bootbox.dialog({
+    				  message: $translate.instant('payment.messages.success.pay'),
+    				  title: $translate.instant('payment.title.pay'),
+    				  buttons: {
+    				    success: {
+    				      label: $translate.instant('global.buttons.accept'),
+    				      className: "btn-success",
+    				      callback: function() {		
+    				    	  $state.reload();
+    				    	  $scope.planModel = {};
+    				      }
+    				    }
+    				  }
+    			});
+    		}).catch(function(response) {
+    			switch(response.status) {
+	    		    case 500:
+	    		    	$translate.instant('global.messages.error.internalServerError');
+	    		        break;
+	    		    case 400:
+	    		    	$scope.error = true;
+	    		    	$scope.errorMessage = response.data.message;
+	    		        break;
+	    		    default:
+	    		        
+	    		}
+    			$scope.processing = false;
+            }); 
+        }
+        
+        
         
     	/**
     	 * go action
