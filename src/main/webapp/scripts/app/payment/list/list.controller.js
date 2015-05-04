@@ -16,7 +16,7 @@
     	 */
     	$scope.delete = function( id ) {
     		bootbox.confirm({
-    			message : $translate.instant('payment.messages.confirmation.deletion'),
+    			message : $translate.instant('payment.messages.confirmation.delete'),
     			buttons: {
     				confirm: {
     					label: $translate.instant('global.buttons.confirm'),
@@ -38,7 +38,7 @@
     	 */
         $scope.pay = function( rowItem ){
         	bootbox.confirm({
-    			message : $translate.instant('payment.messages.confirmation.payment'),
+    			message : $translate.instant('payment.messages.confirmation.pay'),
     			buttons: {
     				confirm: {
     					label: $translate.instant('global.buttons.confirm'),
@@ -77,7 +77,7 @@
     		}).catch(function(response) {
     			switch(response.status) {
 	    		    case 500:
-	    		    	$translate.instant('global.messages.error.internalServerError');
+	    		    	alert($translate.instant('global.messages.error.internalServerError'));
 	    		        break;
 	    		    case 400:
 	    		    	$scope.error = true;
@@ -113,7 +113,7 @@
     		}).catch(function(response) {
     			switch(response.status) {
 	    		    case 500:
-	    		    	$translate.instant('global.messages.error.internalServerError');
+	    		    	alert($translate.instant('global.messages.error.internalServerError'));
 	    		        break;
 	    		    case 400:
 	    		    	$scope.error = true;
@@ -135,7 +135,7 @@
     		$state.go(rt , {id: p1});
         };
         
-    	$scope.plansList = '';
+    	$scope.paymentsList = '';
     	$scope.gridScope = $scope;
     	$scope.gridOptions = {
     		enableFiltering: true,
@@ -150,7 +150,7 @@
 	          { name: ' ', enableFiltering: false, cellTemplate:'<span title=' + $translate.instant('payment.tooltip.pay') + ' class="grid-action-glyphicon glyphicon glyphicon-usd" aria-hidden="true" ng-click="grid.appScope.pay(row.entity)"></span>', maxWidth : 20 },  
 	          { name: '  ', enableFiltering: false, cellTemplate:'<span  title=' + $translate.instant('payment.tooltip.cancel') + ' class=" grid-action-glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 20  }
 	        ],
-	        data: 'plansList',
+	        data: 'paymentsList',
         };
     	
     	
@@ -159,19 +159,20 @@
     	 * Refresh grid action
     	 */
     	$scope.refresh = function () {        	
-            $scope.updatingPlans = true;
+            $scope.updatingData = true;
             $scope.errorMessage = '';
             PaymentService.getAll($scope.filterModel , function (response) {
-                $scope.plansList = response;
-                $scope.updatingPlans = false;
+                $scope.paymentsList = response;
+                $scope.updatingData = false;
             }, function (response) {
             	if (response.status == 401){
             		alert(response.data);            		
             	} else {            		
-            		$scope.plansList = response.data;
-                    $scope.updatingPlans = false;
+            		$scope.paymentsList = response.data;
+                    $scope.updatingData = false;
             	}                
             });
+    		console.log($scope.paymentsList);
         };
         $scope.refresh();    
     }]);

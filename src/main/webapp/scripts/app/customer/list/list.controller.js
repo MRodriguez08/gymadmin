@@ -8,44 +8,58 @@
     	 * Update action
     	 */
     	$scope.delete = function( id ) {
-    		
-    		bootbox.confirm("Are you sure?", function(result) {
-    			if (result){
-    				CustomerService.delete({id : id}).then(function (response) {
-    	    			bootbox.dialog({
-    	    				  message: "Plan eliminado con exito",
-    	    				  title: "Planes",
-    	    				  buttons: {
-    	    				    success: {
-    	    				      label: "Aceptar",
-    	    				      className: "btn-success",
-    	    				      callback: function() {		
-    	    				    	  $state.reload();
-    	    				    	  $scope.planModel = {};
-    	    				      }
-    	    				    }
-    	    				  }
-    	    			});		    	
-    	    		}).catch(function(response) {
-    	    			switch(response.status) {
-    		    		    case 500:
-    		    		    	alert('Error interno de la aplicacion');
-    		    		        break;
-    		    		    case 400:
-    		    		    	$scope.error = true;
-    		    		    	$scope.errorMessage = response.data.message;
-    		    		        break;
-    		    		    default:
-    		    		        
-    		    		}
-    	    			$scope.processing = false;
-    	            });
+    		bootbox.confirm({
+    			message : $translate.instant('customer.messages.confirmation.delete'),
+    			buttons: {
+    				confirm: {
+    					label: $translate.instant('global.buttons.confirm'),
+    				},
+    				cancel: {
+    					label: $translate.instant('global.buttons.cancel'),
+    				}
+    			},
+    			callback: function(result){
+    				if (result){
+    					$scope.deleteCallback(id);
+    				}
     			}
-    		});         
-    		
-    		
-    		
+    		});
         };
+        
+        /**
+         * Deletion callback
+         */
+        $scope.deleteCallback = function(id){
+        	CustomerService.delete({id : id}).then(function (response) {
+    			bootbox.dialog({
+    				  message: $translate.instant('customer.messages.success.delete'),
+    				  title: $translate.instant('global.menu.customers.main'),
+    				  buttons: {
+    				    success: {
+    				      label: $translate.instant('global.buttons.accept'),
+    				      className: "btn-success",
+    				      callback: function() {		
+    				    	  $state.reload();
+    				    	  $scope.planModel = {};
+    				      }
+    				    }
+    				  }
+    			});		    	
+    		}).catch(function(response) {
+    			switch(response.status) {
+	    		    case 500:
+	    		    	alert($translate.instant('global.messages.error.internalServerError'));
+	    		        break;
+	    		    case 400:
+	    		    	$scope.error = true;
+	    		    	$scope.errorMessage = response.data.message;
+	    		        break;
+	    		    default:
+	    		        
+	    		}
+    			$scope.processing = false;
+            });
+		};
         
     	/**
     	 * Update action
@@ -90,6 +104,16 @@
             	}                
             });
         };
-        $scope.refresh();        
+        
+        
+        //Main block
+        try {
+        	
+        	
+        	$scope.refresh();
+		} catch (e) {
+			alert()
+		}        
+                
     }]);
 })() ;

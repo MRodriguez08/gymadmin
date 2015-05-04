@@ -15,6 +15,14 @@
         	"name" : "Nombre",
         	"description" : "Descripcion",
         	"cost" : "Costo"
-        }
+        },
+        "messages" : {
+    		"success" : {
+    			"delete" : "Plan eliminado con exito"
+    		},
+    		"confirmation": {
+    			"deletion": "Estas seguro que quieres eliminar este plan?"
+    		}
+    	}
     }
 }

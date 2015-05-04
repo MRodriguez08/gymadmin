@@ -19,6 +19,7 @@ angular.module('gymAdminApp')
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                         $translatePartialLoader.addPart('customer');
+                        $translatePartialLoader.addPart('global');
                         return $translate.refresh();
                     }]
                 }

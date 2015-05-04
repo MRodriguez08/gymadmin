@@ -34,12 +34,11 @@
     			"retrievePaymentPlans" : "Error recuperando planes de pago"
     		},
     		"success" : {
-    			"create" : "Pago ingresado con exito",
-    			"delete" : "Pago cancelado con exito",
-    			"retrievePaymentPlan" : "Error recuperando planes de pago"
+    			"create" : "",
+    			"delete" : "Cliente dado de baja con éxito" 
     		},
     		"confirmation": {
-    			"deletion": "Estar seguro que quieres cancelar este pago?"
+    			"delete": "Estas seguro que quieres dar de baja a este cliente?"
     		}
     	}
     }

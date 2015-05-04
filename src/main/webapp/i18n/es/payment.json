@@ -40,8 +40,8 @@
     			"pay" : "Cuota pagada con exito"
     		},
     		"confirmation": {
-    			"deletion": "Estar seguro que quieres cancelar este pago?",
-    			"payment": "Estas seguro que quieres marcar esta cuota como paga?"
+    			"delete": "Estar seguro que quieres cancelar este pago?",
+    			"pay": "Estas seguro que quieres marcar esta cuota como paga?"
     		}
     	}
 	}
