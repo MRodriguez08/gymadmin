@@ -45,6 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
     	
 		d.setRegistrationDate(new Date().getTime());
 		d.setImage(createAvatar(d.getImage()));
+		d.setActive(true);
 		customerDao.persist(d);
 		
 		return d;
