@@ -31,10 +31,11 @@
     	"messages" : {
     		"error" : {
     			"retrieveCustomers" : "Error recuperando clientes",
+    			"retrievePlans" : "Error recuperando los planes",
     			"retrievePaymentPlans" : "Error recuperando planes de pago"
     		},
     		"success" : {
-    			"create" : "",
+    			"create" : "Cliente ingresado con exito",
     			"delete" : "Cliente dado de baja con éxito" 
     		},
     		"confirmation": {

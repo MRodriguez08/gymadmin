@@ -73,6 +73,7 @@ public class CustomerResource {
 	@RequestMapping(method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> create(HttpServletRequest request, @RequestBody CustomerEntity e) {
 		try {
+			e.setImage((String)request.getSession().getAttribute(Constants.PENDING_FILE_SESS_VAR));
 			CustomerEntity p = customerService.create(e);
 			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
@@ -80,6 +81,8 @@ public class CustomerResource {
 		} catch (Exception ex) {
 			logger.error(getClass().getCanonicalName() , ex);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}  finally{
+			request.getSession().setAttribute(Constants.PENDING_FILE_SESS_VAR , null);
 		}
 	}
 	
@@ -90,13 +93,14 @@ public class CustomerResource {
 				e.setImage((String)request.getSession().getAttribute(Constants.PENDING_FILE_SESS_VAR));
 			}
 			CustomerEntity p = customerService.edit(e);
-			request.getSession().setAttribute(Constants.PENDING_FILE_SESS_VAR , null);
 			return new ResponseEntity<>(p , HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
 		} catch (Exception ex) {
 			logger.error(getClass().getCanonicalName() , ex);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} finally{
+			request.getSession().setAttribute(Constants.PENDING_FILE_SESS_VAR , null);
 		}
 	}
 }

@@ -4,6 +4,9 @@
   angular.module('gymAdminApp')
     .factory('CustomerService', ['$rootScope', '$http', 'Upload', 'CustomerResource', 'PendingImageResource', function ($rootScope, $http, Upload, CustomerResource, PendingImageResource) {
         return {
+        	getImageSrc: function(img){
+        		return img != null ? 'images/customers/' + img : 'images/unknown-user.png';
+        	},
             getAll: function (data, callback) {
                 var cb = callback || angular.noop;
 

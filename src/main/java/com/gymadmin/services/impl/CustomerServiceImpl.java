@@ -42,8 +42,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public CustomerEntity create(CustomerEntity d) throws Exception {		
+    	
 		d.setRegistrationDate(new Date().getTime());
-		customerDao.persist(d);    		
+		d.setImage(createAvatar(d.getImage()));
+		customerDao.persist(d);
+		
 		return d;
     }
     
@@ -87,6 +90,20 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		File oldf =new File(imagesPath + "/" + newfile);
 		File newf =new File(imagesPath + "/linked_" + newfile);
+ 
+		if(oldf.renameTo(newf)){
+			logger.info("Rename succesful");
+			return newf.getName();
+		} else {
+			throw new Exception("Rename failed");
+		}    		
+    }
+    
+    private String createAvatar(String file) throws Exception {
+    	
+    	String imagesPath = servletContext.getRealPath(Constants.CUSTOMERS_IMAGE_PATH);		
+		File oldf =new File(imagesPath + "/" + file);
+		File newf =new File(imagesPath + "/linked_" + file);
  
 		if(oldf.renameTo(newf)){
 			logger.info("Rename succesful");

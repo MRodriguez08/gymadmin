@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('gymAdminApp')
-    .controller('UpdateCustomerController', ['$scope', '$log', '$state', '$stateParams', 'CustomerService', 'PlanService', 'PaymentPlanService', function ( $scope, $log, $state, $stateParams, CustomerService, PlanService, PaymentPlanService) {
+    .controller('UpdateCustomerController', ['$scope', '$log', '$translate', '$state', '$stateParams', 'CustomerService', 'PlanService', 'PaymentPlanService', function ( $scope, $log, $translate, $state, $stateParams, CustomerService, PlanService, PaymentPlanService) {
     	
     	var i = $stateParams.id;    	
     	$scope.error = false;
@@ -10,44 +10,15 @@
     	$scope.processing = true;
     	$scope.planModel = {};
     	
-    	$scope.getImage = function(img){
-    		return img != null ? 'images/customers/' + img : 'images/unknown-user.png';
-    	}
-    	
-    	PaymentPlanService.getAll({} , function (response) {
-            $scope.paymentPlansList = response;
-        }, function (response) {
-        	alert($translate.instant('customer.messages.error.retrievePaymentPlans'));
-        }); 
-    	
-    	PlanService.getAll({} , function (response) {
-            $scope.plansList = response;
-            CustomerService.get({id : $stateParams.id}).then(function (response) {
-            	$scope.avatar = $scope.getImage(response.image);
-    			$scope.model = response;
-    			$scope.currentPlan = $scope.getCurrentPlan();
-    			$scope.currentPaymentPlan = $scope.getCurrentPaymentPlan();
-    		}).catch(function(response) {
-    			alert('Error interno de la aplicacion');
-    			$scope.processing = false;
-            });   
-            
-        }, function (response) {
-        	alert('Error recuperando planes');             
-        });
-    	
-    	 	
-    	
     	$scope.update = function () {
     		
     		if ($scope.profilePicture != null){
-    			$scope.uploadImage(function(){    				
+    			$scope.uploadImage(function(){
     				$scope.sendUserData();
     			});
     		} else {
     			$scope.sendUserData();
-    		}
-    		
+    		}    		
         };
         
         $scope.getCurrentPlan = function () {
@@ -82,7 +53,7 @@
 			$scope.model.plan = $scope.currentPlan;
 			$scope.model.paymentPlan = $scope.currentPaymentPlan;
     		CustomerService.update($scope.model).then(function (response) {
-    			$scope.avatar = $scope.getImage(response.image);
+    			$scope.avatar = CustomerService.getImageSrc(response.image);
     			$scope.model = response;
     			bootbox.dialog({
     				  message: "Cliente modificado con exito",
@@ -101,7 +72,7 @@
     		}).catch(function(response) {
     			switch(response.status) {
 	    		    case 500:
-	    		    	alert('Error interno de la aplicacion');
+	    		    	alert($translate.instant('global.messages.error.internalServerError'));
 	    		        break;
 	    		    case 400:
 	    		    	$scope.error = true;
@@ -113,6 +84,33 @@
     			$scope.processing = false;
             }); 
         }
+        
+        try {
+        	
+        	PaymentPlanService.getAll({} , function (response) {
+                $scope.paymentPlansList = response;
+            }, function (response) {
+            	throw $translate.instant('customer.messages.error.retrievePaymentPlans');
+            }); 
+        	
+        	PlanService.getAll({} , function (response) {
+                $scope.plansList = response;
+                CustomerService.get({id : $stateParams.id}).then(function (response) {
+                	$scope.avatar = CustomerService.getImageSrc(response.image);
+        			$scope.model = response;
+        			$scope.currentPlan = $scope.getCurrentPlan();
+        			$scope.currentPaymentPlan = $scope.getCurrentPaymentPlan();
+        		}).catch(function(response) {        			
+        			$scope.processing = false;
+        			throw $translate.instant('global.messages.error.internalServerError');
+                });                
+            }, function (response) {
+            	throw alert($translate.instant('global.messages.error.internalServerError'));;
+            });
+        	
+		} catch (e) {
+			alert(e);
+		}
         
     }]);
 })() ;

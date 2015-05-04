@@ -96,7 +96,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Transactional(readOnly = false)
-	//@Scheduled(fixedDelay = 10000, initialDelay = 5000)
+	@Scheduled(fixedDelay = 10000, initialDelay = 5000)
     public void generatePayments(){
     	try {
     		logger.info("Generating payments...");   		
@@ -127,7 +127,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 	
 	@Transactional(readOnly = false)
-	//@Scheduled(fixedDelay = 10000, initialDelay = 0)
+	@Scheduled(fixedDelay = 10000, initialDelay = 0)
 	public void updatePaymentsState() {
 		try {
 			logger.info("Updating payments state...");

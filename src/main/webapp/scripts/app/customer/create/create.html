@@ -1,6 +1,9 @@
 <div>
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    	<div class="col-md-4">
+	     	<img class="img-responsive" alt="" ng-src="{{avatar}}">
+	     </div>
+        <div class="col-md-4">
             <h1 translate="customer.title.create">Create</h1>
 
 			<div ng-show="success">			
@@ -58,9 +61,14 @@
   				<div class="form-group" ng-class="{'has-error' : form.paymentPlan.$dirty && form.paymentPlan.$error.required}">
 				    <label class="control-label" translate="customer.form.paymentPlan" for="paymentPlan">Plan</label>
 				    <select ng-change="updateValidCost()" required id="paymentPlan" name="paymentPlan" class="form-control" ng-model="model.paymentPlan" ng-options="item as item.name for item in paymentPlansList">
-				    <option translate="payment.placeholders.select.paymentPlan" value="">Select the payment plan</option>
+				    <option translate="customer.placeholders.select.paymentPlan" value="">Select the payment plan</option>
 					</select>
-				</div>			
+				</div>	
+				
+				<div class="form-group">
+				    <label translate="customer.form.avatar" for="avatar"></label>
+				    <input id="avatar" type="file" ngf-select ng-model="profilePicture" name="file" accept="image/*" >	
+			  	</div>		
 
                 <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" translate="global.buttons.create">Create</button>
                  <a ui-sref="customer.list">
