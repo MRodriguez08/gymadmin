@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -85,7 +86,9 @@ public class CustomerResource {
 	@RequestMapping(method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> update( HttpServletRequest request, @RequestBody CustomerEntity e) {
 		try {
-			e.setImage((String)request.getSession().getAttribute(Constants.PENDING_FILE_SESS_VAR));
+			if (StringUtils.isEmpty(e.getImage())){
+				e.setImage((String)request.getSession().getAttribute(Constants.PENDING_FILE_SESS_VAR));
+			}
 			CustomerEntity p = customerService.edit(e);
 			request.getSession().setAttribute(Constants.PENDING_FILE_SESS_VAR , null);
 			return new ResponseEntity<>(p , HttpStatus.OK);
