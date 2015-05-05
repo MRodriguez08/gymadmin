@@ -3,7 +3,8 @@
         "title" : {
         	"create" : "Crear nuevo pago",
         	"pay" : "Confirmar pago",
-        	"list" : "Listado de pagos"
+        	"list" : "Listado de pagos",
+        	"view" : "Detalle de pago"
     	},     
         "grid" : {
 			"id" : "Id",
@@ -12,17 +13,15 @@
 			"validCost" : "Costo",
 			"paymentDueDate" : "Vence"
         },
-        "tooltip" : {
-			"cancel" : "Cancelar",
-			"pay" : "Pagar"
-        },
         "form" : {
+        	"id" : "Id",
         	"customer" : "Cliente",
         	"validCost" : "Costo actual",
         	"plan" : "Plan",
         	"planCost" : "Costo del plan",
         	"paymentPlan" : "Plan de pago",
-        	"state" : "Estado"
+        	"state" : "Estado",
+        	"paymentGenerationDate" : "Fecha de generacion del pago"
         },
         "placeholders" : {
         	"select.customer" : "Seleccione el cliente",

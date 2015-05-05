@@ -147,8 +147,9 @@
 	          { displayName: $translate.instant('payment.grid.state.name') , field: 'state.name'},
 	          { displayName: $translate.instant('payment.grid.paymentDueDate') , field: 'paymentDueDate', cellFilter: "date:'dd/MM/yyyy HH:mm'" },
 	          { displayName: $translate.instant('payment.grid.validCost') , field: 'validCost'}, 
-	          { name: ' ', enableFiltering: false, cellTemplate:'<span title=' + $translate.instant('payment.tooltip.pay') + ' class="grid-action-glyphicon glyphicon glyphicon-usd" aria-hidden="true" ng-click="grid.appScope.pay(row.entity)"></span>', maxWidth : 20 },  
-	          { name: '  ', enableFiltering: false, cellTemplate:'<span  title=' + $translate.instant('payment.tooltip.cancel') + ' class=" grid-action-glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 20  }
+	          { name: ' ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span title=' + $translate.instant('global.tooltip.view') + ' class="grid-action-glyphicon glyphicon glyphicon-search" aria-hidden="true" ng-click="grid.appScope.go(\'payment.view\',row.entity.id)"></span>', maxWidth : 5 },
+	          { name: '  ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span title=' + $translate.instant('global.tooltip.pay') + ' class="grid-action-glyphicon glyphicon glyphicon-usd" aria-hidden="true" ng-click="grid.appScope.pay(row.entity)"></span>', maxWidth : 20 },  
+	          { name: '   ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span  title=' + $translate.instant('global.tooltip.cancel') + ' class=" grid-action-glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 20  }
 	        ],
 	        data: 'paymentsList',
         };

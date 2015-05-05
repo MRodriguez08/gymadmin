@@ -84,7 +84,8 @@
         "tooltip" : {
 			"update" : "Modificar",
 			"view" : "Ver mas",
-			"delete" : "Eliminar"
+			"delete" : "Eliminar",
+			"pay" : "Pagar"
         },
         "messages": {
             "info": {
