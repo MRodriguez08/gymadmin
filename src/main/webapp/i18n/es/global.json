@@ -81,6 +81,11 @@
         "placeholders": {
         	"all" : "Todos"
         },
+        "tooltip" : {
+			"update" : "Modificar",
+			"view" : "Ver mas",
+			"delete" : "Eliminar"
+        },
         "messages": {
             "info": {
                 "authenticated": "If you want to <a href=\"#/login\">authenticate</a>, you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\").",

@@ -3,7 +3,8 @@
         "title" : {
         	"create" : "Crear nuevo cliente",
         	"update" : "Modificar cliente",
-        	"list" : "Listado de clientes"
+        	"list" : "Listado de clientes",
+        	"view" : "Detalle de cliente"
     	},     
         "form" : {
         	"name" : "Nombre",
@@ -14,6 +15,11 @@
         	"plan" : "Plan",
         	"avatar" : "Seleccione un avatar",
         	"paymentPlan" : "Plan de pago"
+        },
+        "tooltip" : {
+			"update" : "Modificar",
+			"view" : "Ver mas",
+			"delete" : "Eliminar"
         },
         "grid" : {
         	"id" : "Id",

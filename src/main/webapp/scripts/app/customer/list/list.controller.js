@@ -78,8 +78,9 @@
 	          { displayName: $translate.instant('customer.grid.name'), field: 'name', minWidth : 80},
 	          { displayName: $translate.instant('customer.grid.surname'), field: 'surname', minWidth : 80 },
 	          { displayName: $translate.instant('customer.grid.currentPlan.name'), field: 'currentPlan.name', minWidth : 160},
-	          { name: ' ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span class="grid-action-glyphicon glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'customer.update\',row.entity.id)"></span>', maxWidth : 5 },  
-	          { name: '  ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span class="grid-action-glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 5  }
+	          { name: ' ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span title=' + $translate.instant('global.tooltip.view') + ' class="grid-action-glyphicon glyphicon glyphicon-search" aria-hidden="true" ng-click="grid.appScope.go(\'customer.view\',row.entity.id)"></span>', maxWidth : 5 },
+	          { name: '  ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span title=' + $translate.instant('global.tooltip.update') + ' class="grid-action-glyphicon glyphicon glyphicon-pencil" aria-hidden="true" ng-click="grid.appScope.go(\'customer.update\',row.entity.id)"></span>', maxWidth : 5 },  
+	          { name: '   ', enableFiltering: false, enableSorting: false,enableHiding: false, cellTemplate:'<span title=' + $translate.instant('global.tooltip.delete') + ' class="grid-action-glyphicon glyphicon glyphicon-remove" aria-hidden="true" ng-click="grid.appScope.delete(row.entity.id)"></span>', maxWidth : 5  }
 	        ],
 	        data: 'plansList',
         };

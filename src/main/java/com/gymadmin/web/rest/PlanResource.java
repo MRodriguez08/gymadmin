@@ -3,7 +3,9 @@ package com.gymadmin.web.rest;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +60,8 @@ public class PlanResource {
 			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (BusinessException ex) {
 			return new ResponseEntity<>(JSonFactory.createSimpleMessage(ex.getMessage()) , HttpStatus.BAD_REQUEST);
+		} catch (ConstraintViolationException | DataIntegrityViolationException e) {
+			return new ResponseEntity<>(JSonFactory.createSimpleMessage(e.getMessage()) , HttpStatus.BAD_REQUEST);
 		} catch (Exception ex) {
 			logger.error(getClass().getCanonicalName() , ex);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
